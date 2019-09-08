@@ -1,0 +1,23 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "veebirakendus",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanderzhanni/RakendusteprogSanderHanni.git"
+  },
+  "author": "Sander Hanni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sanderzhanni/RakendusteprogSanderHanni/issues"
+  },
+  "homepage": "https://github.com/Sanderzhanni/RakendusteprogSanderHanni#readme"
+}
