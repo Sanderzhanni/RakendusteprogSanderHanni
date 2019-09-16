@@ -10,4 +10,5 @@ app.use(express.static('dist'));
 
 app.listen(process.env.PORT || PORT, () => {
   console.log("Server started", PORT);
+  console.log('http://localhost:' + PORT +'');
 });

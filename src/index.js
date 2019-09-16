@@ -1,10 +1,15 @@
-const homepage = require("./itemsList.js");
-const itempage = require("./script.js");
+/*jshint esversion: 8 */
+import React from "react";
+import ReactDOM from "react-dom";
 
-console.log("index file");
+const node = document.getElementById("app");
 
 
-window.addEventListener("load", () =>{
-  homepage.setup();
-  itempage.setup();
-});
+ReactDOM.render(
+  React.createElement(
+    "button",
+    {},
+    "I am a button, Hello world"
+  ),
+  node,
+);
