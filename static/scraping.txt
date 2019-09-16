@@ -1,7 +1,0 @@
-itemContainerClass = "product";
-const items = document.getElementsByClassName(itemContainerClass);
-console.log(items);
-
-itemsList = [];
-
-itemsList.from(items)

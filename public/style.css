@@ -11,6 +11,10 @@ body{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  opacity: 0.98;
 }
 
 .header a:hover {
@@ -52,6 +56,8 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .content a{
@@ -86,6 +92,8 @@ body{
   color: black;
   text-align: left;
   margin-left: 10px;
+  margin-right: 10px;
+  width: 300px;
 }
 
 .specs{
@@ -119,4 +127,8 @@ body{
 .break {
   flex-basis: 100%;
   height: 0;
+}
+
+.category-wrapper{
+  padding: 25px;
 }
