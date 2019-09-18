@@ -34,7 +34,7 @@ class HomePage extends React.PureComponent{
       <>
         <Header />
           <select onChange={this.handleChange.bind(this)}>
-            <option value="Digitaalsed klaverid">Digital pianos</option>
+            <option value= "Digitaalsed klaverid" >Digital pianos</option>
             <option value="Basskitarrid">Bass guitars</option>
           </select>
         <ItemList items = {this.state.items}/>
