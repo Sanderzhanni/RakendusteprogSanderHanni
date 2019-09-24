@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header.jsx";
+import Header from "./header.jsx";
 import ItemList from "./ItemList.jsx";
 import {digitalPianos, bassGuitars} from "./mydatabase.js";
 
