@@ -20,50 +20,18 @@ const utils = require("./utils.js");
 
 
 
-const isNumberValid = (inputString, {precision = 9, scale = 0}) => {
+const isNumberValid = (inputString, { precision = 9, scale = 0 }) => {
 
-  // console.log(inputString.length);
-  // console.log(precision);
-  // console.log(scale);
+    let [before, after] = inputString.split(".");
+    after = after ? after.length : 0;
+    before = before.length;
 
-  let isValidScale;
-  let isValidPrecision;
+    if (isNaN(inputString)) return false;
+    if (before + after > precision) return false;
+    if (after > scale) return false;
+    if (inputString.indexOf(".") >= 0 && after === 0) return false;
 
-  if(inputString.length > precision){
-    isValidPrecision = false;
-  }else{
-    isValidPrecision = true;
-  }
-
-
-  function countDecimalPlaces(inputString) {
-    let number = parseFloat(inputString);
-  var str = "" + number;
-  var index = str.indexOf('.');
-  if (index >= 0) {
-
-    return str.length - index - 1;
-  } else {
-    return 0;
-  }
-}
-
-if(countDecimalPlaces(inputString) > scale){
-  isValidScale = false;
-}else{
-  isValidScale = true;
-}
-
-  console.log(isValidPrecision, isValidScale);
-  if(isValidPrecision && isValidScale){result = true;}else{result=false;}
-
-
-
-
-
-
-
-  return result;
+    return true;
 };
 
 utils.test(isNumberValid("200.345",{}), false); // scale default value is 0
@@ -88,7 +56,9 @@ utils.test(isNumberValid("10.",{scale: 3}), false); // not a number
  * Vaata teste näidete jaoks.
  *
  */
-const sumCallback = () => "implement";
+const sumCallback = (a, b, cb) => {
+    return cb(a + b);
+};
 
 /**
  * Utility function. Don't change me!
@@ -111,7 +81,11 @@ utils.test( sumCallback(0,-2, myCallback), "hello--2");
  * ehk argumendid peavad olema erinevates sulgudes.
  *
  */
-const add = "implement";
+const add = (a) => {
+    return function (b) {
+        return a + b;
+    }
+};
 
 try{
   utils.test( add(2)(3),5 );

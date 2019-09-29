@@ -1,21 +1,46 @@
 import React from "react";
 import Header from "./header.jsx";
-import ItemList from "./ItemList.jsx";
-import {digitalPianos, bassGuitars} from "./mydatabase.js";
+import PropTypes from "prop-types";
 
 class ItemPage extends React.PureComponent{
 
-  render(){
-    const item = digitalPianos[0];
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    componentDidMount() {
+        this.fetchItem();
+    }
+
+    fetchItem = () => {
+        fetch("/api/items/" + this.props.match.params.itemId + "")
+            .then(res => {
+
+                return res.json();
+            })
+            .then(item => {
+                this.setState({
+                    ...item
+                });
+            })
+            .catch(err => {
+                console.log("err", err);
+            });
+    }
+
+    render() {
+    console.log(this.props);
+    console.log(this.props.match.params.itemId);
     return(
       <>
         <Header />
           <div className="content">
             <div className="product">
               <div>
-                <img className="img" src={item.imgSrc}/>
-                <div className="productTitle">{item.title}</div>
-                <div className="productPrice">{item.price}</div>
+                <img className="img" src={this.state.imgSrc}/>
+                <div className="productTitle">{this.state.title}</div>
+                <div className="productPrice">${this.state.price}</div>
               </div>
             </div>
           </div>
@@ -24,5 +49,9 @@ class ItemPage extends React.PureComponent{
     );
   }
 }
+
+ItemPage.propTypes = {
+    match: PropTypes.object.isRequired,
+};
 
 export default ItemPage;
