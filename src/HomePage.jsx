@@ -1,10 +1,14 @@
 import React from "react";
 import Header from "./header.jsx";
 import ItemList from "./ItemList.jsx";
+import "./checkbox.css";
 //import {digitalPianos, bassGuitars} from "./mydatabase.js";
 
 class HomePage extends React.PureComponent{
 
+    state = { checked: false }
+
+  
   constructor(props){
     super(props);
     this.state = {
@@ -58,10 +62,13 @@ class HomePage extends React.PureComponent{
         return this.state.items.filter(item => item.category === this.state.selectedCategory);
     };
 
+    
+
   render(){
     return(
       <>
-        <Header />
+          <Header />
+
           <select onChange={this.handleDropdown.bind(this)}>
             <option value= "Digitaalsed klaverid" >Digital pianos</option>
             <option value="Basskitarrid">Bass guitars</option>
