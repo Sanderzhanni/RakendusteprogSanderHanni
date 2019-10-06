@@ -2,36 +2,126 @@ body{
   margin: auto;
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> lesson5
 
 
-.content{
-  padding-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 80vw;
-  margin: 0 auto;
+
+@media only screen and (max-width: 1240px) {
+    .content {
+        display: block;
+        margin: 0 auto;
+        width: 95vw;
+    }
+
+    .product {
+        width: 100vw;
+        height: 200px;
+        box-shadow: 1px 2px 2px 1px #9C7D8F;
+    }
+
+    .img {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+    }
+
+    .productTitle {
+        font-size: 14px;
+        margin-bottom: 10px;
+        font-weight: 200;
+        color: black;
+        width: 60vw;
+    }
+
+    .productPrice {
+        font-size: 22px;
+        font-weight: bold;
+        color: #ff2424;
+        margin-left: 10px;
+        padding-bottom: 5px;
+    }
 }
 
-.content a{
-  text-decoration: none;
+
+@media only screen and (min-width: 1241px){
+    .content {
+        padding-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+        .content a {
+            text-decoration: none;
+        }
+
+    .product {
+        box-shadow: 1px 2px 2px 1px #9C7D8F;
+        border-radius: 5px;
+        height: 450px;
+        margin: 5px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+        .product:hover {
+            transition-duration: 0.5s;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
+        }
+
+        .product img {
+            width: 300px;
+            height: 200px;
+            padding: 10px;
+        }
+
+    .productTitle {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 200;
+        color: black;
+        text-align: left;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 300px;
+    }
+
+    .specs {
+        text-align: justify;
+        width: 300px;
+        margin: 15px;
+        color: black;
+        font-size: 15px;
+    }
+
+    .productPrice {
+        font-size: 26px;
+        font-weight: bold;
+        color: #ff2424;
+        margin-left: 10px;
+        padding-bottom: 5px;
+    }
+
+    .category-wrapper {
+        padding: 25px;
+    }
+
+    .checkbox__Container {
+        display: flex;
+        justify-content: space-around;
+        width: 30vw;
+        margin: 0 auto;
+    }
 }
 
-.product{
-  box-shadow: 1px 2px 2px 1px #9C7D8F;
-  border-radius: 5px;
-  height: 450px;
-  margin: 5px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
 
-.product:hover{
-  transition-duration: 0.5s;
-  transform: scale(1.05);
-  box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
-}
-
+<<<<<<< HEAD
 .product img{
   width: 300px;
   height: 200px;
@@ -146,3 +236,5 @@ body{
 .cart, .loginButton {
     font-size: 16px;
 }
+=======
+>>>>>>> lesson5
