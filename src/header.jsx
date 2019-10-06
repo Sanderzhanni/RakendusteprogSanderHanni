@@ -1,5 +1,6 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./header.css";
 
 const Header = () => {
   return (
@@ -8,8 +9,8 @@ const Header = () => {
         <img src="/img/tlu.png" alt="tlu logo" className="logo"/>
       </Link>
       <div className="headerButtons" id="headerButtons">
-        <button className="loginButton" id="loginButton">Login/Signup</button>
-        <button className="cart" id="cart"><img src="/img/cartIcon.jpg" className="carticon"/>Shopping Cart</button>
+              <button className="loginButton" id="loginButton"><img src="/img/user.png" className="carticon" />Login/Signup</button>
+        <button className="cart" id="cart"><img src="/img/cart.png" className="carticon"/>Shopping Cart</button>
       </div>
     </div>
   );
