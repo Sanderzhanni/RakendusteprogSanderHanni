@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./header.jsx";
 import ItemList from "./ItemList.jsx";
 //import {digitalPianos, bassGuitars} from "./mydatabase.js";
+import Checkbox from "./Checkbox.jsx";
 
 class HomePage extends React.PureComponent{
 
@@ -9,7 +10,8 @@ class HomePage extends React.PureComponent{
     super(props);
     this.state = {
         items: [],
-        selectedCategory: "Digitaalsed klaverid",
+        allCategories: ["Digitaalsed klaverid", "Basskitarrid"],
+        selectedCategories: ["Digitaalsed klaverid"],
     };
     }
 
@@ -20,7 +22,7 @@ class HomePage extends React.PureComponent{
     fetchItems = () => {
         fetch("/api/items")
             .then(res => {
-                console.log("res", res);
+                //console.log("res", res);
                 return res.json();
             })
             .then(items => {
@@ -34,39 +36,50 @@ class HomePage extends React.PureComponent{
             });
     }
 
-    handleDropdown(e) {
-        this.setState({
-            selectedCategory: e.target.value,
-        });
-    //switch (e.target.value) {
-    //  case "Digitaalsed klaverid":{
-    //    this.setState({
-    //      items: digitalPianos,
-    //    });
-    //    break;
-    //  }
-    //  case "Basskitarrid": {
-    //    this.setState({
-    //      items: bassGuitars,
-    //    });
-    //    break;
-    //  }
-    //}
+    handleDropdown = (e) => {
+        console.log(e);
+        if (this.isSelected(e.target.name)) {
+            const clone = this.state.selectedCategories.slice();
+            const index = this.state.selectedCategories.indexOf(e.target.name);
+            clone.splice(index, 1);
+            this.setState({
+                selectedCategories: clone
+            });
+        } else {
+            this.setState({
+                selectedCategories: this.state.selectedCategories.concat([e.target.name])
+            });
+        }
     }
 
+    
+
     getVisibleItems = () => {
-        return this.state.items.filter(item => item.category === this.state.selectedCategory);
+        return this.state.items.filter(item => this.isSelected(item.category));
     };
+
+    isSelected = (name) => {
+        //console.log(name);
+        return this.state.selectedCategories.indexOf(name) >= 0;
+    }
 
   render(){
     return(
       <>
-        <Header />
-          <select onChange={this.handleDropdown.bind(this)}>
-            <option value= "Digitaalsed klaverid" >Digital pianos</option>
-            <option value="Basskitarrid">Bass guitars</option>
-          </select>
-        <ItemList items = {this.getVisibleItems()}/>
+            <Header />
+            {
+                this.state.allCategories.map(categoryName => {
+                    return (
+                        <Checkbox
+                            key={categoryName}
+                            name={categoryName}
+                            onChange={this.handleDropdown}
+                            checked={this.isSelected(categoryName)}
+                        />
+                    );
+                })
+            }
+            <ItemList items={this.getVisibleItems()} />
       </>
 
     );
