@@ -72,20 +72,6 @@ class HomePage extends React.PureComponent{
             
     };
 
-<<<<<<< HEAD
-    
-
-  render(){
-    return(
-      <>
-          <Header />
-
-          <select onChange={this.handleDropdown.bind(this)}>
-            <option value= "Digitaalsed klaverid" >Digital pianos</option>
-            <option value="Basskitarrid">Bass guitars</option>
-          </select>
-        <ItemList items = {this.getVisibleItems()}/>
-=======
     isSelected = (name) => {
         //console.log(name);
         return this.state.selectedCategories.indexOf(name) >= 0;
@@ -130,7 +116,6 @@ class HomePage extends React.PureComponent{
                 items found: {items.length} kategooriatest: {this.state.selectedCategories.join(", ")}
             </div>
             <ItemList items={this.getVisibleItems()} />
->>>>>>> lesson5
       </>
 
     );
