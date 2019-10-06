@@ -82,7 +82,8 @@ class HomePage extends React.PureComponent{
 
 
 
-  render(){
+    render() {
+        const items = this.getVisibleItems();
     return(
       <>
             <Header />
@@ -106,6 +107,9 @@ class HomePage extends React.PureComponent{
                     direction={this.state.sortDirection}
                     onChange={this.handleSortDropdown}
                 />
+            </div>
+            <div>
+                items found: {items.length} kategooriatest: {this.state.selectedCategories.join(", ")}
             </div>
             <ItemList items={this.getVisibleItems()} />
       </>
