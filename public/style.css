@@ -73,3 +73,10 @@ body{
 .category-wrapper{
   padding: 25px;
 }
+
+.checkbox__Container {
+    display: flex;
+    justify-content: space-around;
+    width: 30vw;
+    margin: 0 auto;
+}
