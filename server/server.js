@@ -4,11 +4,11 @@ const PORT = process.env.PORT || 3000;
 const path = require("path");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const userRouter = require("./user.js");
+const itemRouter = require("./item.router.js");
 
 const DB_URL = `mongodb+srv://` + process.env.DB_USERNAME + `:` + process.env.DB_PASS + `@rakprog-aq8p2.mongodb.net/` + process.env.DB_NAME + `?retryWrites=true&w=majority`;
 
-app.use(userRouter);
+app.use(itemRouter);
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
