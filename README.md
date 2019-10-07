@@ -31,3 +31,5 @@
 * Kasutajad saavad tatud aja sees tellimuse katkestada
 * Kasutajatel on võimalik luua enda Kasutajad
 * Tooteid ostes saavad kasutajad sooduskuponge
+
+![meme](./public/img/meme.png)
