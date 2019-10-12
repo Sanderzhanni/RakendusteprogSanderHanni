@@ -4,7 +4,7 @@ import "./checkbox.css";
 
 const Checkbox = ({name, onChange, checked}) => {
     return (
-        <label className="toggle">
+        <label className="toggle" htmlFor={name}>
             {name}
           <input
                     name={name}

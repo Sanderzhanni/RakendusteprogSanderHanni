@@ -5,8 +5,11 @@ select {
     appearance: none;
     outline: 0;
     box-shadow: none;
-    border: 0 !important;
-    background: #2c3e50;
+    border-bottom: solid #000 2px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background: #fff;
     background-image: none;
 }
     /* Remove IE arrow */
@@ -18,12 +21,11 @@ select {
     position: relative;
     display: flex;
     width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: #2c3e50;
+    height: 2em;
+    line-height: 1.7;
+    background: #fff;
     overflow: hidden;
-    border-radius: .25em;
-    margin: 0 auto;
+    border-radius: .35em;
     margin-top: 20px;
 }
 
@@ -32,6 +34,8 @@ select {
     padding: 0 .5em;
     color: #fff;
     cursor: pointer;
+    color: #000;
+    font-size: 1.2rem;
 }
 /* Arrow */
 .select::after {
@@ -39,8 +43,9 @@ select {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 0 1em;
-    background: #34495e;
+    padding: 0 .3em;
+    font-size: 1.3rem;
+    background: #fff;
     cursor: pointer;
     pointer-events: none;
     -webkit-transition: .25s all ease;
@@ -49,5 +54,5 @@ select {
 }
 /* Transition */
 .select:hover::after {
-    color: #f39c12;
+    color: #C70039;
 }

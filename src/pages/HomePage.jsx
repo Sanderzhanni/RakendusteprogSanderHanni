@@ -104,14 +104,19 @@ class HomePage extends React.PureComponent{
                 }
             </div>
 
+            
+            <div className="foundItems">
+                <p>
+                Items found: {items.length}
+                 <br></br> 
+                 Kategooriad: {this.state.selectedCategories.join(", ")}
+                </p>
+            </div>
             <div className={"items-settings"}>
                 <SortDropdown
                     direction={this.state.sortDirection}
                     onChange={this.handleSortDropdown}
                 />
-            </div>
-            <div>
-                items found: {items.length} kategooriatest: {this.state.selectedCategories.join(", ")}
             </div>
             <ItemList items={this.getVisibleItems()} />
       </>
