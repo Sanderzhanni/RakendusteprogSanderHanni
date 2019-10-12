@@ -20,7 +20,7 @@ class LoginPage extends React.PureComponent{
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        //console.log("submit", this.state);
+        console.log("submit", this.state);
     }
 
     render(){

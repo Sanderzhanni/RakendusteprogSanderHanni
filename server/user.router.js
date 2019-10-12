@@ -4,6 +4,7 @@ const User = require("./user.model.js");
 
 
 
+
 //fetch all users
 router.get("/api/users", (req, res) => {
     User.find({}, (err, docs) =>{
@@ -13,20 +14,31 @@ router.get("/api/users", (req, res) => {
 
 });
 
-//request user
+//request user [login]
 router.post("/api/users/login", (req, res) => {
-   User.findOne({email: req.body.email}, (err, doc)=>{
-    if(err) return handleError(err, res);
-    res.send(doc);
-   });
+
+    User.login(req.body)
+    .then(user =>{
+        res.json(user);
+    })
+    .catch(err =>{
+        return handleError(err, res);
+    });
+
+//    User.findOne({email: req.body.email}, (err, doc)=>{
+//     if(err) return handleError(err, res);
+//     res.send(doc);
+//    });
 });
 
-//post a user
+//post a user [create new user]
 router.post("/api/users/signup", (req, res) => {
-    const user = new User(req.body);
-    user.save((err) =>{
-        if(err) return handleError(err, res);
+    User.signup(req.body)
+    .then(user =>{
         res.status(200).json(user);
+    })
+    .catch(err =>{
+        return handleError(err, res);
     });
 });
 
