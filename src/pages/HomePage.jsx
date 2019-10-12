@@ -1,10 +1,9 @@
 import React from "react";
-import Header from "./header.jsx";
-import ItemList from "./ItemList.jsx";
-import "./checkbox.css";
+import ItemList from "../components/ItemList.jsx";
+import "../components/checkbox.css";
 //import {digitalPianos, bassGuitars} from "./mydatabase.js";
-import Checkbox from "./Checkbox.jsx";
-import SortDropdown from "./SortDropdown.jsx";
+import Checkbox from "../components/Checkbox.jsx";
+import SortDropdown from "../components/SortDropdown.jsx";
 
 class HomePage extends React.PureComponent{
 
@@ -90,7 +89,6 @@ class HomePage extends React.PureComponent{
         const items = this.getVisibleItems();
     return(
       <>
-            <Header />
             <div className="checkbox__Container">
             {
                 this.state.allCategories.map(categoryName => {
