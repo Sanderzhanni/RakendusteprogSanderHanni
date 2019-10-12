@@ -10,7 +10,9 @@ const Header = () => {
         <img src="/img/tlu.png" alt="tlu logo" className="logo"/>
       </Link>
       <div className="headerButtons" id="headerButtons">
-        <button className="loginButton" id="loginButton"><img src="/img/user.png" className="carticon" />Login/Signup</button>
+        <Link to={"/login"}>
+            <button className="loginButton" id="loginButton"><img src="/img/user.png" className="carticon" />Login/Signup</button>
+        </Link>
         <button className="cart" id="cart"><img src="/img/cart.png" className="carticon"/>Shopping Cart</button>
       </div>
     </div>
