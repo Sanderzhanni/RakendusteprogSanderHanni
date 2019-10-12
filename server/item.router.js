@@ -1,28 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const DB = require("./database.js");
 const mongoose = require("mongoose");
 const Item = require("./item.model.js");
 
-
-//post
-
-
-router.post("/api/items", (req, res) => {
-
-    const items = DB.getItems();
-
-    items.forEach(item => {
-        const document = new Item(item);
-        document.save((err) => {
-            if (err) {
-                console.log("Error", err);
-                return;
-            }
-            console.log("Saved succesfully!");
-        });
-    });
-});
 
 //fetch
 router.get("/api/items", (req, res) => {
@@ -36,30 +16,6 @@ router.get("/api/items", (req, res) => {
     });
     //res.json(DB.getItems());
 });
-
-
-//deleteall
-
-function deleteMany(){
-    Item.deleteMany({}, (err, doc) => {
-        if (err) {
-            console.log("Error", err);
-            return;
-        }
-        console.log("Deleted successfully!");
-        console.log(doc);
-    });
-}
-
-function migrate() {
-    Item.count({}, (err, countNr) => {
-        if (err) {
-            console.log("Error", err);
-            return;
-        }
-        console.log("Item count: ", countNr);
-    });
-}
 
 
 //Delete
