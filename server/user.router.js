@@ -43,8 +43,8 @@ check('email').isEmail()
 .withMessage(" Must contain minimum eight characters")
 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
 .withMessage("Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number")
-.not().isIn(['Parool123', 'Password123', '123456aA'])
-.withMessage('Do not use a common word as the password')
+.not().isIn(["Parool123", "Password123", "123456aA"])
+.withMessage("Do not use a common word as the password")
 ],
 (req, res) => {
     const errors = validationResult(req);
