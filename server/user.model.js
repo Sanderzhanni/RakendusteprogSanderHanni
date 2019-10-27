@@ -9,16 +9,26 @@ const userSchema = new mongoose.Schema({
 
 
 //logs a new user in
-userSchema.statics.login = function({email, password}){
-    return new Promise((resolve, reject) =>{
-        User.findOne({email}, (err, doc)=>{
-            if(err) return reject(err);
-            if(doc === null) return reject("User not found");
-            bcrypt.compare(password, doc.hash, function(err, result) {
-                if(err) return reject(err);
-                resolve(result);
+userSchema.statics.login = function ({
+    email,
+    password
+}) {
+    return new Promise((resolve, reject) => {
+        User.findOne({
+            email
+        }, (err, userDoc) => {
+            if (err) return reject(err);
+            if (userDoc === null) return reject("User not found");
+            bcrypt.compare(password, userDoc.hash, function (err, result) {
+                if (err) return reject(err);
+                if(!result) return reject("Invalid credentials");
+                resolve({
+                    _id: userDoc._id,
+                    email: userDoc.email,
+                    created_at: userDoc.created_at
+                });
             });
-           });
+        });
     });
 };
 
