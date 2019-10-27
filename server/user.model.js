@@ -21,6 +21,7 @@ userSchema.statics.login = function ({
             if (userDoc === null) return reject("User not found");
             bcrypt.compare(password, userDoc.hash, function (err, result) {
                 if (err) return reject(err);
+                if(!result) return reject("Invalid credentials");
                 resolve({
                     _id: userDoc._id,
                     email: userDoc.email,

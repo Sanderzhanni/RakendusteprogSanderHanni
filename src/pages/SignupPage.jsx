@@ -1,15 +1,19 @@
 import React from "react";
 import "./Form.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class SignupPage extends React.PureComponent{
+
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+    };
 
     constructor(props){
         super(props);
         this.state = {
             email:"",
             password:"",
-            confirmPassword:"",
         };
     }
 
@@ -23,7 +27,7 @@ class SignupPage extends React.PureComponent{
     handleSubmit = (e) =>{
         e.preventDefault();
         //console.log("submit", this.state);
-        fetch("/api/users/signup", {
+        fetch("/api/v1/auth/signup", {
             method: "POST",
             body: JSON.stringify(this.state),
             headers: {
@@ -31,23 +35,29 @@ class SignupPage extends React.PureComponent{
             },
         })
         .then(res =>{
-            console.log("respone", res);
+            res.json();
+        })
+        .then( data =>{
+            console.log(data);
+            this.props.history.push("/login");
         })
         .catch(err =>{
             console.log("erorr", err);
         });
     }
-    render(){
-        return(
-            <div className="form">
-                <form className="register-form" onSubmit={this.handleSubmit}>
-                    <input type="email" placeholder="email address" name={"email"} onChange={this.handleChange}/>
-                    <input type="password" placeholder="password" name={"password"} onChange={this.handleChange}/>
-                    <input type="password" placeholder="confirm password" name={"confirmPassword"} onChange={this.handleChange}/>
-                    <button>create</button>
-                    <p className="message">Already registered? <Link to={"/login"}>Login</Link></p>
-                </form>
-            </div>
+    render() {
+        return (
+            <>
+                <div><h1 style={{ textAlign: "center" }}>SignupPage</h1></div>
+                <div className="form">
+                    <form className="register-form" onSubmit={this.handleSubmit}>
+                        <input type="email" placeholder="email address" name={"email"} onChange={this.handleChange} />
+                        <input type="password" placeholder="password" name={"password"} onChange={this.handleChange} />
+                        <button>create</button>
+                        <p className="message">Already registered? <Link to={"/login"}>Login</Link></p>
+                    </form>
+                </div>
+            </>
         );
     }
 }
