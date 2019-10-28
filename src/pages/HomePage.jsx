@@ -41,21 +41,31 @@ class HomePage extends React.PureComponent{
             });
     }
 
-    handleDropdown = (e) => {
-        console.log(e);
-        if (this.isSelected(e.target.name)) {
-            const clone = this.state.selectedCategories.slice();
-            const index = this.state.selectedCategories.indexOf(e.target.name);
-            clone.splice(index, 1);
-            this.setState({
-                selectedCategories: clone
-            });
-        } else {
-            this.setState({
-                selectedCategories: this.state.selectedCategories.concat([e.target.name])
-            });
-        }
+    handleSelectedFilter = (e) => {
+        const category_name = e.target.name;
+
+        if (this.isSelected(category_name)) {
+            return this.unselect_category(category_name);
+        } 
+
+        this.select_category(category_name); 
     }
+
+    select_category = (category_name) =>{
+        this.setState({
+            selectedCategories: this.state.selectedCategories.concat([category_name])
+        });
+    };
+
+    unselect_category = (category_name) =>{
+
+        const sorted_array = this.state.selectedCategories.filter(cn => cn !== category_name);
+
+        this.setState({
+            selectedCategories: sorted_array
+        });
+
+    };
 
     
 
@@ -96,7 +106,7 @@ class HomePage extends React.PureComponent{
                         <Checkbox
                             key={categoryName}
                             name={categoryName}
-                            onChange={this.handleDropdown}
+                            onChange={this.handleSelectedFilter}
                             checked={this.isSelected(categoryName)}
                             />
                     );
