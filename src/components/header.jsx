@@ -20,6 +20,14 @@ const WelcomeIcon = ({user}) => {
   );
 };
 
+const Cart = () =>{
+  return(
+    <Link to={"/cart"}>
+    <button className="cart" id="cart"><img src="/img/cart.png" className="carticon" />Shopping Cart</button>
+    </Link>
+  );
+};
+
 const Header = ({user}) => {
   return (
     <div className="header">
@@ -29,7 +37,7 @@ const Header = ({user}) => {
       <div className="headerButtons" id="headerButtons">
         {user.email && <WelcomeIcon user={user} />}
         {!user.email && <ProfileIcon />}
-        <button className="cart" id="cart"><img src="/img/cart.png" className="carticon" />Shopping Cart</button>
+        <Cart />
       </div>
     </div>
   );

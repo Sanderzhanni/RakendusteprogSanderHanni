@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch} from "react-router-dom";
 import Header from "./components/header.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import StorePage from "./pages/StorePage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
@@ -51,6 +52,7 @@ class App extends React.Component{
               render={(props) => <LoginPage {...props} onLogin={this.handleLogin} />}
             />
             <Route path="/signup" exact component={SignupPage} />
+            <Route path={"/cart"} component={StorePage}/>
             <Route path="/users/:userId" exact component={UserPage}/>
             <Route path="/items/:itemId" exact component={ItemPage} />
 

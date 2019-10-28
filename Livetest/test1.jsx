@@ -16,6 +16,7 @@ const ITEMS = [
 ];
 
 class LiveTest1 extends React.PureComponent {
+
   state = {
     rows: ITEMS
   };
@@ -23,18 +24,23 @@ class LiveTest1 extends React.PureComponent {
     return(
       <>
         <div>Products below:</div>
-        <div>{this.state.rows}</div>
+        <div>
+        {this.state.rows.map(item =>{
+           return(
+             <div key={}>{item.name} {item.cost}</div>
+             );
+        })
+        }
+        </div>
         <hr/>
 
-        <div>{this.handleSum()}</div> 
+        <div>{this.state.rows.cost.reduce((total, amount) => total + amount)}</div> 
       </>
     );
   }
 }
 
-handleSum = () =>{
-    //mingi fuktsioon
-};
+
 
 export default LiveTest1;
 

@@ -43,7 +43,6 @@ class ItemPage extends React.PureComponent{
             </div>
           </div>
       </>
-
     );
   }
 }
