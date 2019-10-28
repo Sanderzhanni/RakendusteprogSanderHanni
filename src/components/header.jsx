@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
 import PropTypes from "prop-types";
+import {Auth_context} from "../index.jsx";
 
 
 const ProfileIcon = () => {
@@ -20,26 +21,35 @@ const WelcomeIcon = ({user}) => {
   );
 };
 
-const Header = ({token, user}) => {
-  console.log(token);
+const Header = () => {
   return (
-    <div className="header">
-      <Link to={"/"}>
-        <img src="/img/tlu.png" alt="tlu logo" className="logo"/>
-      </Link>
-      <div className="headerButtons" id="headerButtons">
-        { user.email && <WelcomeIcon user={user}/>}
-        { !user.email && <ProfileIcon />}
-        <button className="cart" id="cart"><img src="/img/cart.png" className="carticon"/>Shopping Cart</button>
-      </div>
-    </div>
+    <Auth_context.Consumer>
+
+      {
+        (context_value) =>(
+          <div className="header">
+          <Link to={"/"}>
+            <img src="/img/tlu.png" alt="tlu logo" className="logo" />
+          </Link>
+          <div className="headerButtons" id="headerButtons">
+            {context_value.user.email && <WelcomeIcon user={context_value.user} />}
+            {!context_value.user.email && <ProfileIcon />}
+            <button className="cart" id="cart"><img src="/img/cart.png" className="carticon" />Shopping Cart</button>
+          </div>
+        </div>
+        )
+        
+      }
+
+    </Auth_context.Consumer>
+    
   );
 };
 
-Header.propTypes = {
+/* Header.propTypes = {
   token: PropTypes.string,
   user: PropTypes.object,
-};
+}; */
 
 WelcomeIcon.propTypes = {
   user: PropTypes.object.isRequired,
