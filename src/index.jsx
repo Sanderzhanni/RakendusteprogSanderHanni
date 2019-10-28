@@ -1,7 +1,7 @@
 /*jshint esversion: 8 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route} from "react-router-dom";
+import { BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Header from "./components/header.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
 
 class App extends React.Component{
 
@@ -31,10 +33,14 @@ class App extends React.Component{
   render(){
     return(
       <BrowserRouter>
-        <Route 
+
+      <Route 
           path={"/"} 
           render = { (props) => <Header {...props} token={this.state.token} user={this.state.user}/>}
         />
+
+      <Switch>
+      
         <Route path="/" exact component={HomePage} />
         <Route 
           path="/login" 
@@ -48,6 +54,11 @@ class App extends React.Component{
           render = { (props) => <UserPage {...props} user={this.state.user}/>}
         />
         <Route path="/items/:itemId" exact component={ItemPage} />
+
+        <Route component={NotFound}/>
+
+      </Switch>
+       
       </BrowserRouter>
     );
   }
