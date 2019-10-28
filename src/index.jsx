@@ -51,11 +51,7 @@ class App extends React.Component{
               render={(props) => <LoginPage {...props} onLogin={this.handleLogin} />}
             />
             <Route path="/signup" exact component={SignupPage} />
-            <Route
-              path="/users/:userId"
-              exact
-              render={(props) => <UserPage {...props} user={this.state.user} />}
-            />
+            <Route path="/users/:userId" exact component={UserPage}/>
             <Route path="/items/:itemId" exact component={ItemPage} />
 
             <Route component={NotFound} />

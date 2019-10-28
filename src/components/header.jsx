@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
 import PropTypes from "prop-types";
-import {Auth_context} from "../index.jsx";
-
+import auth_consumer from "./authConsumer.jsx";
 
 const ProfileIcon = () => {
   return(
@@ -21,40 +20,30 @@ const WelcomeIcon = ({user}) => {
   );
 };
 
-const Header = () => {
+const Header = ({user}) => {
   return (
-    <Auth_context.Consumer>
-
-      {
-        (context_value) =>(
-          <div className="header">
-          <Link to={"/"}>
-            <img src="/img/tlu.png" alt="tlu logo" className="logo" />
-          </Link>
-          <div className="headerButtons" id="headerButtons">
-            {context_value.user.email && <WelcomeIcon user={context_value.user} />}
-            {!context_value.user.email && <ProfileIcon />}
-            <button className="cart" id="cart"><img src="/img/cart.png" className="carticon" />Shopping Cart</button>
-          </div>
-        </div>
-        )
-        
-      }
-
-    </Auth_context.Consumer>
-    
+    <div className="header">
+      <Link to={"/"}>
+        <img src="/img/tlu.png" alt="tlu logo" className="logo" />
+      </Link>
+      <div className="headerButtons" id="headerButtons">
+        {user.email && <WelcomeIcon user={user} />}
+        {!user.email && <ProfileIcon />}
+        <button className="cart" id="cart"><img src="/img/cart.png" className="carticon" />Shopping Cart</button>
+      </div>
+    </div>
   );
 };
 
-/* Header.propTypes = {
+Header.propTypes = {
   token: PropTypes.string,
   user: PropTypes.object,
-}; */
+}; 
 
 WelcomeIcon.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default Header;
+export default auth_consumer(Header);
 
 //fix
