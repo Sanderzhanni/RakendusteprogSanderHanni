@@ -27,11 +27,9 @@ class HomePage extends React.PureComponent{
     fetchItems = () => {
         fetch("/api/v1/items")
             .then(res => {
-                //console.log("res", res);
                 return res.json();
             })
             .then(items => {
-                //console.log("items", items);
                 this.setState({
                     items
                 });
@@ -82,12 +80,10 @@ class HomePage extends React.PureComponent{
     };
 
     isSelected = (name) => {
-        //console.log(name);
         return this.state.selectedCategories.indexOf(name) >= 0;
     }
 
     handleSortDropdown = (e) => {
-        console.log(e.target.value);
         this.setState({
             sortDirection: parseInt(e.target.value),
         });

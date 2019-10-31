@@ -31,7 +31,7 @@ const Cart = () =>{
 const Header = ({user}) => {
   return (
     <div className="header">
-      <Link to={"/"}>
+      <Link to={"/"} className="logohover">
         <img src="/img/tlu.png" alt="tlu logo" className="logo" />
       </Link>
       <div className="headerButtons" id="headerButtons">

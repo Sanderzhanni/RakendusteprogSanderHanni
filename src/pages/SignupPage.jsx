@@ -18,7 +18,6 @@ class SignupPage extends React.PureComponent{
     }
 
     handleChange = (e) =>{
-        //console.log("event ", e.target.value);
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -26,7 +25,6 @@ class SignupPage extends React.PureComponent{
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        //console.log("submit", this.state);
         fetch("/api/v1/auth/signup", {
             method: "POST",
             body: JSON.stringify(this.state),
@@ -37,12 +35,11 @@ class SignupPage extends React.PureComponent{
         .then(res =>{
             res.json();
         })
-        .then( data =>{
-            console.log(data);
+        .then( () =>{
             this.props.history.push("/login");
         })
-        .catch(err =>{
-            console.log("erorr", err);
+        .catch((err) =>{
+            console.log("err", err);
         });
     }
     render() {

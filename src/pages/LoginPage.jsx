@@ -19,7 +19,6 @@ class LoginPage extends React.PureComponent{
     }
 
     handleChange = (e) =>{
-        //console.log("event ", e.target.value);
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -27,7 +26,6 @@ class LoginPage extends React.PureComponent{
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        //console.log("submit", this.state);
         fetch("/api/v1/auth/login", {
             method: "POST",
             body: JSON.stringify(this.state),
@@ -37,12 +35,11 @@ class LoginPage extends React.PureComponent{
         })
         .then( res =>(res.json()))
         .then(({token, user}) =>{
-            console.log("respone", token, user);
             this.props.onLogin({token, user});
             this.props.history.push("/users/" + user._id);
         })
         .catch(err =>{
-            console.log("erorr", err);
+            console.log("err", err);
         });
     }
 

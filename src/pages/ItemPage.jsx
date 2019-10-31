@@ -29,8 +29,6 @@ class ItemPage extends React.PureComponent{
     }
 
     render() {
-    console.log(this.props);
-    console.log(this.props.match.params.itemId);
     return(
       <>
           <div className="content">
