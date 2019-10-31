@@ -21,8 +21,11 @@
     }
     
     .logo {
-        width: 50px;
-        height: 50px;
+        width: 25px;
+        height: 25px;
+        background-image: linear-gradient(#9C4C4C, #C73309, #D71C51  );
+        padding: 8px;
+        border-radius: 5px;
     }
     
     .logo a {
@@ -98,6 +101,9 @@
     .logo {
         width: 50px;
         height: 50px;
+        background-image: linear-gradient(#9C4C4C, #C73309, #D71C51  );
+        padding: 8px;
+        border-radius: 5px;
     }
     
     .logo a {
