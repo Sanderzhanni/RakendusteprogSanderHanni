@@ -4,6 +4,7 @@ import "../components/checkbox.css";
 //import {digitalPianos, bassGuitars} from "./mydatabase.js";
 import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
+import { getItems } from "../actions/itemsActions.js";
 
 class HomePage extends React.PureComponent{
 
@@ -25,18 +26,15 @@ class HomePage extends React.PureComponent{
     }
 
     fetchItems = () => {
-        fetch("/api/v1/items")
-            .then(res => {
-                return res.json();
-            })
-            .then(items => {
-                this.setState({
-                    items
-                });
-            })
-            .catch(err => {
-                console.log("err", err);
+        getItems()
+        .then(items => {
+            this.setState({
+                items
             });
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
     }
 
     handleSelectedFilter = (e) => {

@@ -5,6 +5,7 @@ const itemSchema = new mongoose.Schema({
     title: { type: String, required: true },
     price: { type: Number, required: true },
     category: { type: String, required: true },
+    quantity: { type: Number, required: true},
     created_at: { type: Date, default: Date.now },
 });
 

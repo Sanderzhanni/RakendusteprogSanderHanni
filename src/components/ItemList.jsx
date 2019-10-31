@@ -15,6 +15,7 @@ const ItemList = (props) => {
             imgSrc={item.imgSrc}
             title={item.title}
             price={item.price}
+            quantity={1}
           />;
         })
       }
@@ -45,7 +46,8 @@ Item.propTypes = {
     id: PropTypes.string.isRequired,
     imgSrc: PropTypes.string,
     title: PropTypes.string,
-    price: PropTypes.String
+    price: PropTypes.String,
+    quantity: PropTypes.number
 };
 
 export default ItemList;
