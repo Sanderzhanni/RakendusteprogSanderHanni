@@ -1,9 +1,10 @@
 import React from "react";
 import { getItems } from "../actions/itemsActions.js";
 import PropTypes from "prop-types";
-import { IoIosArrowUp, IoIosArrowDown} from "react-icons/io";
 import { MdDeleteForever} from "react-icons/md";
 import "./storepage.css";
+import InputNumber from "rc-input-number";
+import "rc-input-number/assets/index.css";
 
 
 
@@ -75,10 +76,11 @@ class Store extends React.PureComponent{
 }
 
 const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
+  console.log(quantity);
   return (
       <div className="item">
         <div className="buttons">
-          <button className="delete-btn"><MdDeleteForever size={32}/></button>
+          <button className="delete-btn"><MdDeleteForever size={28}/></button>
         </div>
         <img src={imgSrc} className="image" />
         <div className="description">
@@ -86,13 +88,7 @@ const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
           <span>{category}</span>
         </div>
         <div className="quantity">
-          <button className="plus-btn" type="button" name="button" onClick={()=>{quantity++;console.log(quantity);}}>
-            < IoIosArrowUp/>
-          </button>
-          <input type="text" name="quantity" value={quantity}></input>
-          <button className="minus-btn" type="button" name="button" onClick={()=>{quantity++;console.log(quantity);}}>
-          < IoIosArrowDown/>
-          </button>
+          <InputNumber defaultValue={1} min={1} max={quantity}/>
         </div>
         <div className="price">${price}</div>
       </div>

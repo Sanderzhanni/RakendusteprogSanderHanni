@@ -11,7 +11,7 @@ const getItems = () => {
         items.push({
             
             ...digitalPiano,
-            quantity: 1,
+            quantity: 2,
             category: "Digitaalsed klaverid"
         });
     });
@@ -19,7 +19,7 @@ const getItems = () => {
     bassGuitars.forEach((bassGuitar, index) => {
         items.push({
             ...bassGuitar,
-            quantity: 1,
+            quantity: 2,
             category: "Basskitarrid"
         });
     });

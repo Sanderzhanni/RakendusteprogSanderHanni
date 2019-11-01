@@ -48,7 +48,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyPlugin([
       {
-        from: "public"
+        from: "public",
       }
     ])
   ]
