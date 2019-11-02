@@ -1,7 +1,5 @@
 # RakendusteprogSanderHanni
 
-* Lesson1
-
 ## Heroku leht
 
 * https://rphannis2019.herokuapp.com/
@@ -13,10 +11,10 @@
 * Kasutatakse küpsiseid, et näidata kasutajatele sobivaid tooteid
 * Saab valida tooteid kategooriate alusel :heavy_check_mark:
 * Saab sorteerida tooteid hinna ja populaarsuse järgi
-* Peab toimima nutiseadmete peal
+* Peab toimima nutiseadmete peal :heavy_check_mark:
 * kõrge kvaliteediga thumbnailid
 * Pakub kasutajatele erilisi pakkumisi (?küpsiste alusel?)
-* Tooteid saab lisada ostukorvi
+* Tooteid saab lisada ostukorvi :heavy_check_mark:
 * Tooteid saab eemaldada ostukorvist
 * Enne maksmist pakutakse kasutajatele lisaks "related" tooteid
 * Saab maksta krediitkaardiga
@@ -28,10 +26,12 @@
 * Kasutajad saavad toote kohta lisainformatsiooni
 * Peab olema turvaline
 * Kasutajad saavad küsimuste korral mulle kirjutada emaili
-* Kasutajad saavad tatud aja sees tellimuse katkestada
-* Kasutajatel on võimalik luua enda Kasutajad
+* Kasutajad saavad teatud aja sees tellimuse katkestada
+* Kasutajatel on võimalik luua enda Kasutajad :heavy_check_mark:
 * Tooteid ostes saavad kasutajad sooduskuponge
+* Kasutajad saavad kasutada wishlisti: Neile saadetakse teave, kui toote, mis on nende wishlistis, hinda alandatakse
+* On võimalik esitada tellimusi
 
-# ==============================
+======
 
 ![meme](./public/img/meme.png)
