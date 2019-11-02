@@ -34,12 +34,46 @@
 
 ## Tehniline küsimus
 
+**Kas saab kutsuda välja klassi funktsiooni ja klassi state muuta väljaspool klassi?**
+
 ```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
+class Classname extends React.PureComponent{
+
+  constructor(props) {
+    super(props);
+    this.function = this.function.bind(this);
+    this.state = {
+      some_state: value,
+    };
   }
+
+  function = ()=> {
+    console.log("hello world");
+  }
+
+  componentDidMount(){
+    this.setState({
+        some_state: new_value
+    });
+  }
+
+    render() {
+        return(
+            <>     
+                <div><FunctionalComponent key={props._id} {...props} /><div/>
+            </>
+
+        );
+    }
 }
+
+const FunctionalComponent = ({props}) =>{
+  return (
+      <div>
+        <button onClick={this.function}>click me!</button>
+      </div>
+  );
+};
 ```
 
 Meme
