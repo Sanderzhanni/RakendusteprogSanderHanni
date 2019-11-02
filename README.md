@@ -32,6 +32,16 @@
 * Kasutajad saavad kasutada wishlisti: Neile saadetakse teave, kui toote, mis on nende wishlistis, hinda alandatakse
 * On võimalik esitada tellimusi
 
+## Tehniline küsimus
+
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```
+
 Meme
 ======
 
