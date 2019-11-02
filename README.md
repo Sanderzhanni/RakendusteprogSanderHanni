@@ -11,7 +11,7 @@
 * Lehel kuvatakse automaatselt kampaania tooted
 * Lehel  tuuakse soodustusega tooted esile
 * Kasutatakse küpsiseid, et näidata kasutajatele sobivaid tooteid
-* Saab valida tooteid kategooriate alusel
+* Saab valida tooteid kategooriate alusel :heavy_check_mark:
 * Saab sorteerida tooteid hinna ja populaarsuse järgi
 * Peab toimima nutiseadmete peal
 * kõrge kvaliteediga thumbnailid
