@@ -2,13 +2,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch} from "react-router-dom";
-import store from "./store.js";
-console.log(store);
 
 import Header from "./components/header.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import StorePage from "./pages/StorePage.jsx";
+import StorePage from "./pages/CartPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";

@@ -5,21 +5,30 @@ import { MdDeleteForever} from "react-icons/md";
 import "./storepage.css";
 import InputNumber from "rc-input-number";
 import "rc-input-number/assets/index.css";
+import { Link } from "react-router-dom";
 
 
 
-class Store extends React.PureComponent{
+
+
+class Cart extends React.PureComponent{
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       rows: [],
+      related: [],
+      items: []
     };
   }
 
   handleClick = ()=> {
-    console.log("sth");
+    console.log("Format button");
+  }
+
+  onSelect = key => {
+    this.setState({ selected: key });
   }
 
   componentDidMount(){
@@ -27,6 +36,8 @@ class Store extends React.PureComponent{
     .then(items =>{
       this.setState({
         rows: items.slice(0,4),
+        items,
+        related: (items.filter(item => !items.slice(0,4).includes(item.category) && !items.slice(0,4).includes(item))).slice(0,5),
       });
     })
     .catch( err => {
@@ -42,7 +53,7 @@ class Store extends React.PureComponent{
                   <div className="title">Shopping Cart</div>
                   {this.state.rows.map((row) => <ItemPurchase key={row._id} {...row} />)}
                 </div>
-              <div className="total">
+                <div className="total">
                 <div className="title">Total</div>
                 <table>
                   <tbody>
@@ -68,6 +79,11 @@ class Store extends React.PureComponent{
                   <button className="total-btn" onClick={this.handleClick}>Format Transaction</button>
                 </div>  
               </div>
+
+              <div  className="related-products">
+                <div className="title">Related Products</div>
+                {this.state.related.map( (item) => <RelatedItems key={item._id} {...item}/> )}
+              </div>
         </>
   
       );
@@ -76,7 +92,6 @@ class Store extends React.PureComponent{
 }
 
 const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
-  console.log(quantity);
   return (
       <div className="item">
         <div className="buttons">
@@ -95,6 +110,17 @@ const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
   );
 };
 
+const RelatedItems = ({title, imgSrc, _id}) =>{
+  return(
+    <Link to={"/items/"+_id+""}>
+      <div className="related-product">
+        <img src={imgSrc} className="related-image" />
+        <div className="description">{title}</div>
+      </div>
+    </Link>
+  );
+};
+
 ItemPurchase.propTypes ={
   title: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
@@ -103,4 +129,12 @@ ItemPurchase.propTypes ={
   quantity: PropTypes.number.isRequired,
 };
 
-export default Store;
+RelatedItems.propTypes ={
+  title: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
+};
+
+
+
+export default Cart;
