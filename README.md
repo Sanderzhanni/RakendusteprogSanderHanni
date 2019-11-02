@@ -32,6 +32,7 @@
 * Kasutajad saavad kasutada wishlisti: Neile saadetakse teave, kui toote, mis on nende wishlistis, hinda alandatakse
 * On võimalik esitada tellimusi
 
+Meme
 ======
 
 ![meme](./public/img/meme.png)
