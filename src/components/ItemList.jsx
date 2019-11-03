@@ -46,7 +46,7 @@ Item.propTypes = {
     id: PropTypes.string.isRequired,
     imgSrc: PropTypes.string,
     title: PropTypes.string,
-    price: PropTypes.String,
+    price: PropTypes.number,
     quantity: PropTypes.number
 };
 

@@ -19,7 +19,6 @@ class Cart extends React.PureComponent{
     this.state = {
       rows: [],
       related: [],
-      items: []
     };
   }
 
@@ -27,17 +26,12 @@ class Cart extends React.PureComponent{
     console.log("Format button");
   }
 
-  onSelect = key => {
-    this.setState({ selected: key });
-  }
-
   componentDidMount(){
     getItems()
     .then(items =>{
       this.setState({
         rows: items.slice(0,4),
-        items,
-        related: (items.filter(item => !items.slice(0,4).includes(item.category) && !items.slice(0,4).includes(item))).slice(0,5),
+        related: (items.filter(item => !items.slice(0,4).includes(item))).slice(0,5),
       });
     })
     .catch( err => {
@@ -95,7 +89,7 @@ const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
   return (
       <div className="item">
         <div className="buttons">
-          <button className="delete-btn"><MdDeleteForever size={28}/></button>
+          <button className="delete-btn" onClick={() => console.log("remove item:", title)}><MdDeleteForever size={28}/></button>
         </div>
         <img src={imgSrc} className="image" />
         <div className="description">
@@ -103,7 +97,7 @@ const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
           <span>{category}</span>
         </div>
         <div className="quantity">
-          <InputNumber defaultValue={1} min={1} max={quantity}/>
+          <InputNumber defaultValue={1} min={1} max={quantity} onChange={(value) => console.log("Amount:", value, "/", quantity)}/>
         </div>
         <div className="price">${price}</div>
       </div>
@@ -112,7 +106,7 @@ const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
 
 const RelatedItems = ({title, imgSrc, _id}) =>{
   return(
-    <Link to={"/items/"+_id+""}>
+    <Link to={"/items/"+_id}>
       <div className="related-product">
         <img src={imgSrc} className="related-image" />
         <div className="description">{title}</div>

@@ -16,6 +16,7 @@
 * Pakub kasutajatele erilisi pakkumisi (?küpsiste alusel?)
 * Tooteid saab lisada ostukorvi :heavy_check_mark:
 * Tooteid saab eemaldada ostukorvist
+* Saab valida toote hulka ostukorvis :heavy_check_mark:
 * Enne maksmist pakutakse kasutajatele lisaks "related" tooteid
 * Saab maksta krediitkaardiga
 * Saab maksta pangalingiga
@@ -31,6 +32,7 @@
 * Tooteid ostes saavad kasutajad sooduskuponge
 * Kasutajad saavad kasutada wishlisti: Neile saadetakse teave, kui toote, mis on nende wishlistis, hinda alandatakse
 * On võimalik esitada tellimusi
+* Osutkorvis pakutakse kasutajale related tooteid :heavy_check_mark:
 
 ## Tehniline küsimus
 
