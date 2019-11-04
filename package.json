@@ -17,6 +17,7 @@
     "react-dom": "^16.9.0",
     "react-horizontal-scrolling-menu": "^0.7.3",
     "react-icons": "^3.8.0",
+    "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4"
   },
@@ -36,6 +37,7 @@
     "eslint": "^6.4.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-react": "^7.14.3",
+    "nodemon": "^1.19.4",
     "prop-types": "^15.7.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
@@ -45,8 +47,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "node server/server.js",
-    "start:dev": "webpack-dev-server --open --mode=\"development\"",
+    "start:prelive": "npm run build && PORT=3001 npm run start",
+    "start:backend": "nodemon ./server/server.js",
+    "start:frontend": "webpack-dev-server --open --mode=\"development\"",
     "lint": "eslint --version"
   },
   "repository": {

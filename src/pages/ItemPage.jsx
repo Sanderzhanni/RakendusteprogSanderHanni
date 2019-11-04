@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {addItem} from "../store.js";
 
 class ItemPage extends React.PureComponent{
+
+  
 
     constructor(props) {
         super(props);
         this.state = {};
     }
+    
 
     componentDidMount() {
         this.fetchItem();
@@ -37,6 +41,8 @@ class ItemPage extends React.PureComponent{
                 <img className="img" src={this.state.imgSrc}/>
                 <div className="productTitle">{this.state.title}</div>
                 <div className="productPrice">${this.state.price}</div>
+                <div><button>osta</button></div>
+                <div>{this.props.dispatch(addItem(this.state))}</div>
               </div>
             </div>
           </div>
@@ -47,6 +53,7 @@ class ItemPage extends React.PureComponent{
 
 ItemPage.propTypes = {
     match: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 export default ItemPage;
