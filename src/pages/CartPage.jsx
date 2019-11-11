@@ -146,7 +146,7 @@ RelatedItems.propTypes ={
   _id: PropTypes.string.isRequired,
 };
 
-const ItemProps = {
+export const ItemProps = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
