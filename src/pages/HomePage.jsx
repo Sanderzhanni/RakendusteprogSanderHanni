@@ -1,7 +1,7 @@
 import React from "react";
 import ItemList from "../components/ItemList.jsx";
 import "../components/checkbox.css";
-import "../components/style.css";
+import "../components/main.css";
 import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
 import { getItems } from "../store/store.js";

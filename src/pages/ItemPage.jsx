@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addItem} from "../store/store.js";
+import "../components/itempage.css";
 
 class ItemPage extends React.PureComponent{
 
@@ -44,12 +45,15 @@ class ItemPage extends React.PureComponent{
     return(
       <>
           <div className="content">
-            <div className="product">
+            <div className="product-item">
               <div>
-                <img className="img" src={this.state.imgSrc}/>
-                <div className="productTitle">{this.state.title}</div>
-                <div className="productPrice">${this.state.price}</div>
-                <div><button onClick={this.handleBuy}>osta</button></div>
+                <div className="title-item">{this.state.title}</div>
+                <div className="container-item">
+                  <img className="image-item" src={this.state.imgSrc}/>
+                  <div className="description-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                  <div className="price-item">${this.state.price}</div>
+                  <button className="btn-item" onClick={this.handleBuy}>Lisa korvi</button>
+                </div>
               </div>
             </div>
           </div>
