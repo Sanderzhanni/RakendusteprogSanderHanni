@@ -48,8 +48,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
+    "start": "node server/server.js",
     "start:prelive": "npm run build && set PORT=3001 npm run start",
-    "start": "nodemon ./server/server.js",
+    "start:backend": "nodemon ./server/server.js",
     "start:frontend": "webpack-dev-server --open --mode=\"development\"",
     "lint": "eslint --version"
   },
