@@ -7,10 +7,6 @@ import InputNumber from "rc-input-number";
 import "rc-input-number/assets/index.css";
 import { Link } from "react-router-dom";
 
-
-
-
-
 class Cart extends React.PureComponent{
 
   constructor(props) {

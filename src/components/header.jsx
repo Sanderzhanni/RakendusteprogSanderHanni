@@ -9,7 +9,7 @@ const imgPath = "/img";
 const ProfileIcon = () => {
   return(
     <Link to={"/login"}>
-        <button className="loginButton" id="loginButton"><img src={imgPath+"/user.png"} className="carticon" />Login/Signup</button>
+        <button className="loginButton" id="loginButton"><img src="/img/user.png" className="carticon" />Login/Signup</button>
     </Link>
   );
 };

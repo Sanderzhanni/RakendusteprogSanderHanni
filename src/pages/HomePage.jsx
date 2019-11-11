@@ -1,6 +1,7 @@
 import React from "react";
 import ItemList from "../components/ItemList.jsx";
 import "../components/checkbox.css";
+import "../components/style.css";
 //import {digitalPianos, bassGuitars} from "./mydatabase.js";
 import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
