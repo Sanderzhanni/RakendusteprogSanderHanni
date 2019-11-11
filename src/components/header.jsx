@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./header.css";
 import PropTypes from "prop-types";
 import auth_consumer from "./authConsumer.jsx";
+import {connect} from "react-redux";
 
 const imgPath = "/img";
 
@@ -30,7 +31,18 @@ const Cart = () =>{
   );
 };
 
-const Header = ({user}) => {
+const Badge = ({children}) =>{
+  if(children === 0) return null;
+  return(
+    <span>{children}</span>
+  );
+};
+
+Badge.propTypes = {
+  children: PropTypes.number
+};
+
+const Header = ({user, cart}) => {
   return (
     <div className="header">
       <Link to={"/"} className="logohover">
@@ -40,6 +52,7 @@ const Header = ({user}) => {
         {user.email && <WelcomeIcon user={user} />}
         {!user.email && <ProfileIcon />}
         <Cart />
+        <Badge>{cart.length}</Badge>
       </div>
     </div>
   );
@@ -48,12 +61,29 @@ const Header = ({user}) => {
 Header.propTypes = {
   token: PropTypes.string,
   user: PropTypes.object,
-}; 
+  cart: PropTypes.arrayOf(ItemProps).isRequired,
+};
+
+const ItemProps = {
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  category:PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
 WelcomeIcon.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default auth_consumer(Header);
+const mapStateToProps = (store) =>{
+  return{
+    cart: store.cart,
+  };
+    
+};
+
+export default connect(mapStateToProps)(auth_consumer(Header));
 
 //fix

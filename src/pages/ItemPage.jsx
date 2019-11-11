@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {addItem} from "../store/store.js";
 
 class ItemPage extends React.PureComponent{
 
-  
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+  }
 
     constructor(props) {
         super(props);
@@ -31,6 +35,11 @@ class ItemPage extends React.PureComponent{
             });
     }
 
+    handleBuy = () => {
+      console.log("buy");
+      this.props.dispatch(addItem(this.state));
+    } 
+    
     render() {
     return(
       <>
@@ -40,7 +49,7 @@ class ItemPage extends React.PureComponent{
                 <img className="img" src={this.state.imgSrc}/>
                 <div className="productTitle">{this.state.title}</div>
                 <div className="productPrice">${this.state.price}</div>
-                <div><button>osta</button></div>
+                <div><button onClick={this.handleBuy}>osta</button></div>
               </div>
             </div>
           </div>
@@ -54,4 +63,4 @@ ItemPage.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-export default ItemPage;
+export default connect()(ItemPage);

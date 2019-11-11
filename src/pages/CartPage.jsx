@@ -6,14 +6,29 @@ import "./storepage.css";
 import InputNumber from "rc-input-number";
 import "rc-input-number/assets/index.css";
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import { removeItem } from "../store/store.js";
 
 class Cart extends React.PureComponent{
+
+  static propTypes = {
+    cart: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  calcSum = () =>{
+    const VAT = 20;
+    const withoutTax = Math.round(this.props.cart.reduce((acc, item) => acc + item.price, 0));
+    const tax = Math.round(withoutTax / 100 * VAT);
+    return{
+      withoutTax, tax
+    };
+  };
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      rows: [],
       related: [],
     };
   }
@@ -22,12 +37,15 @@ class Cart extends React.PureComponent{
     console.log("Format button");
   }
 
+  handleRemove = (_id) =>{
+    this.props.dispatch(removeItem(_id));
+  };
+
   componentDidMount(){
     getItems()
     .then(items =>{
       this.setState({
-        rows: items.slice(0,4),
-        related: (items.filter(item => !items.slice(0,4).includes(item))).slice(0,5),
+        related: (items.filter(item => !this.props.cart.includes(item))).slice(0,5),
       });
     })
     .catch( err => {
@@ -36,12 +54,13 @@ class Cart extends React.PureComponent{
   }
 
       render() {
+        const {tax, withoutTax} = this.calcSum();
       return(
         <>    
                
                 <div className="shopping-cart">
                   <div className="title">Shopping Cart</div>
-                  {this.state.rows.map((row) => <ItemPurchase key={row._id} {...row} />)}
+                  {this.props.cart.map((row, index) => <ItemPurchase onRemove={this.handleRemove} key={index} {...row} />)}
                 </div>
                 <div className="total">
                 <div className="title">Total</div>
@@ -53,15 +72,15 @@ class Cart extends React.PureComponent{
                 </tr>
                 <tr>
                   <td><div className="total-text">Tax:</div></td>
-                  <td><div className="total-price">$2000</div></td>
+                  <td><div className="total-price">${tax}</div></td>
                 </tr>
                 <tr>
                   <td><div className="total-text">Without Tax:</div></td>
-                  <td><div className="total-price">$4000</div></td>
+                  <td><div className="total-price">${withoutTax}</div></td>
                 </tr>
                 <tr>
                   <td><div className="total-text">Total:</div></td>
-                  <td><div className="total-price">$6000</div></td>
+                  <td><div className="total-price">${tax + withoutTax}</div></td>
                 </tr>
                 </tbody>                        
                 </table>
@@ -81,11 +100,11 @@ class Cart extends React.PureComponent{
 
 }
 
-const ItemPurchase = ({title, imgSrc, category, price, quantity}) =>{
+const ItemPurchase = ({ _id, title, imgSrc, category, price, quantity, onRemove}) =>{
   return (
       <div className="item">
         <div className="buttons">
-          <button className="delete-btn" onClick={() => console.log("remove item:", title)}><MdDeleteForever size={28}/></button>
+          <button className="delete-btn" onClick={() => onRemove(_id)}><MdDeleteForever size={28}/></button>
         </div>
         <img src={imgSrc} className="image" />
         <div className="description">
@@ -112,11 +131,13 @@ const RelatedItems = ({title, imgSrc, _id}) =>{
 };
 
 ItemPurchase.propTypes ={
+  _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   category:PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 RelatedItems.propTypes ={
@@ -125,6 +146,20 @@ RelatedItems.propTypes ={
   _id: PropTypes.string.isRequired,
 };
 
+const ItemProps = {
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  category:PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
+const mapStateToProps = (store) =>{
+  return{
+    cart: store.cart,
+  };
+    
+};
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);

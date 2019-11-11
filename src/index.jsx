@@ -2,7 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch} from "react-router-dom";
+import {Provider} from "react-redux";
 
+import store from "./store/store.js";
 import Header from "./components/header.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -38,7 +40,8 @@ class App extends React.Component{
   render() {
     return (
 
-      <Auth_context.Provider value={this.state}>
+      <Provider store={store}>
+        <Auth_context.Provider value={this.state}>
         <BrowserRouter>
 
           <Route path={"/"} component={Header}/>
@@ -62,6 +65,9 @@ class App extends React.Component{
 
         </BrowserRouter>
       </Auth_context.Provider>
+      </Provider>
+
+      
 
     );
   }
