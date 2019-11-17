@@ -3,8 +3,79 @@ info:
   title: TLU
   description: ""
   version: "1.0.0"
+servers:
+  - url: localhost:3000/api/v1
+security: 
+  - bearerAuth: []
 paths:
-  /api/v1/login:
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Returns an user object
+      security: 
+        - bearerAuth: []
+      parameters:
+         - $ref: "#/components/parameters/userIdparam"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        401:
+          description: Forbidden
+        500:
+          description: err
+  /items/{itemId}:
+    get:
+      operationId: getItem
+      summary: Returns an item
+      parameters:
+         - $ref: "#/components/parameters/itemIdparam"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        401:
+          description: Forbidden
+        500:
+          description: err
+  /users/{userId}/cart/{itemId}:
+    put:
+      operationId: addItemToCart
+      summary: Adds an item to the cart
+      security: 
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/userIdparam"
+        - $ref: "#/components/parameters/itemIdparam"
+      responses:
+        200:
+          description: OK
+        401:
+          description: Forbidden
+        500:
+          description: err
+    delete:
+      operationId: removeItemFromCart
+      summary: Removes an item from the cart
+      security: 
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/userIdparam"
+        - $ref: "#/components/parameters/itemIdparam"
+      responses:
+        200:
+          description: OK
+        401:
+          description: Forbidden
+        500:
+          description: err
+  /login:
     post:
       operationId: login
       summary: User signs in
@@ -31,17 +102,19 @@ paths:
                   token:
                     type: string
                   user:
-                    email:
-                      type: string
-                    createdAt:
-                      type: Date
-                    _id:
-                      type: string
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      createdAt:
+                        type: integer
+                      _id:
+                        type: string
         422:
           description: bad email or password
         401:
           description: unauthorized
-  /api/v1/signup:
+  /signup:
     post:
       operationId: signup
       summary: User creates an account
@@ -64,3 +137,47 @@ paths:
           description: bad email or password
         401:
           description: unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        createdAt:
+          type: string
+        cart:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+    Item:
+      type: object
+      properties:
+        _id:
+          type: string
+        price:
+          type: integer
+        title:
+          type: string
+        createdAt:
+          type: string
+  parameters:
+    userIdparam:
+      in: path
+      name: userId
+      schema:
+        type: string
+      required: true
+    itemIdparam:
+      in: path
+      name: itemId
+      schema:
+        type: string
+      required: true
