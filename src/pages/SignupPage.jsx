@@ -2,6 +2,7 @@ import React from "react";
 import "./Form.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import {toast} from "react-toastify";
 
 class SignupPage extends React.PureComponent{
 
@@ -40,6 +41,7 @@ class SignupPage extends React.PureComponent{
         })
         .catch((err) =>{
             console.log("err", err);
+            toast.error("Kasutaja loomine ebaõnnestus", {position: "bottom-center", pauseOnHover: false});
         });
     }
     render() {

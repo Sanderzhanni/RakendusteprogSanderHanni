@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ToastContainer/>
+          <ToastContainer autoClose={2000}/>
             <BrowserRouter>
               <Route path={"/"} component={Header} />
               <Switch>

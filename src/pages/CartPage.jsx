@@ -8,6 +8,7 @@ import "rc-input-number/assets/index.css";
 import { Link } from "react-router-dom";
 import {connect} from "react-redux";
 import { removeItem } from "../store/actions.js";
+import {toast} from "react-toastify";
 
 class Cart extends React.PureComponent{
 
@@ -38,6 +39,7 @@ class Cart extends React.PureComponent{
   }
 
   handleRemove = (_id) =>{
+    toast.success("toode eemaldatud");
     this.props.dispatch(removeItem(_id));
   };
 

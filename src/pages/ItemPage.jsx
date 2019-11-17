@@ -10,6 +10,7 @@ import "../components/itempage.css";
 class ItemPage extends React.PureComponent{
 
   static propTypes = {
+    history: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -47,7 +48,7 @@ class ItemPage extends React.PureComponent{
     }
 
     handleBuy = () => {
-      toast.success("toode lisatud", {position: "bottom-center"});
+      toast.success("toode lisatud", {hideProgressBar: true, position: "bottom-right"});
       this.props.dispatch(addItem(this.state));
     } 
     
