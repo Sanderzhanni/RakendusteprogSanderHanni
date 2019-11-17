@@ -29,11 +29,6 @@ app.get('/items/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, "../dist", "index.html"));
 });
 
-/** For images and bundle.js */
-app.use("/static", express.static("dist/static"));
-
-/** For index.html */
-app.use("/*", express.static("dist"));
 
 DB.connect()
 .then(()=>{
