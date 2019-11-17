@@ -3,8 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import configureStore from "./store/configureStore.js";
 
-import store from "./store/store.js";
 import Header from "./components/header.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -13,6 +14,8 @@ import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
+
+const {store, persistor} = configureStore();
 
 const auth_default_value = {
   token: null,
@@ -41,6 +44,7 @@ class App extends React.Component{
     return (
 
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
         <Auth_context.Provider value={this.state}>
         <BrowserRouter>
 
@@ -65,6 +69,7 @@ class App extends React.Component{
 
         </BrowserRouter>
       </Auth_context.Provider>
+      </PersistGate>
       </Provider>
 
       

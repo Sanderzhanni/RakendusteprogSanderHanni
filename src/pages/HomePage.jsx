@@ -4,7 +4,7 @@ import "../components/checkbox.css";
 import "../components/main.css";
 import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
-import { getItems } from "../store/store.js";
+import { getItems } from "../store/actions.js";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ItemProps} from "./CartPage.jsx";

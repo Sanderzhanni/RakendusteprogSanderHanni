@@ -27,7 +27,11 @@ class LoginPage extends React.PureComponent{
     handleSubmit = (e) =>{
         e.preventDefault();
         fetch("/api/v1/auth/login", {
-
+            method: "POST",
+            body: JSON.stringify(this.state),
+            headers: {
+                "Content-Type": "application/json"
+            },
         })
         .then( res =>(res.json()))
         .then(({token, user}) =>{

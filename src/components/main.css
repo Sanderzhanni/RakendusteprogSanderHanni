@@ -125,9 +125,11 @@ body{
         }
 
         .product img {
-            width: 300px;
+            width: 225px;
             height: 200px;
             padding: 10px;
+            display:block;
+            margin:auto;
         }
 
     .productTitle {

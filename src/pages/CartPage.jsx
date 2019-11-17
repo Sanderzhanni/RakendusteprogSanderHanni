@@ -7,7 +7,7 @@ import InputNumber from "rc-input-number";
 import "rc-input-number/assets/index.css";
 import { Link } from "react-router-dom";
 import {connect} from "react-redux";
-import { removeItem } from "../store/store.js";
+import { removeItem } from "../store/actions.js";
 
 class Cart extends React.PureComponent{
 

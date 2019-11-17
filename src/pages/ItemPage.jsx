@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addItem} from "../store/store.js";
+import {addItem} from "../store/actions.js";
 import "../components/itempage.css";
 
 class ItemPage extends React.PureComponent{
