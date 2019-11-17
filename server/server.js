@@ -21,13 +21,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", itemRouter);
 app.use("/api/v1/users", userRouter);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-});
 
-app.get('/items/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../dist", "index.html"));
-});
 
 /** For images and bundle.js */
 app.use("/static", express.static("dist/static"));
