@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addItem} from "../store/actions.js";
+import {toast} from "react-toastify";
 import "../components/itempage.css";
+
+
 
 class ItemPage extends React.PureComponent{
 
@@ -18,6 +21,12 @@ class ItemPage extends React.PureComponent{
 
     componentDidMount() {
         this.fetchItem();
+
+        toast.configure({
+          autoClose: 100,
+          draggable: false,
+          //etc you get the idea
+        });
     }
 
     fetchItem = () => {
@@ -27,6 +36,7 @@ class ItemPage extends React.PureComponent{
                 return res.json();
             })
             .then(item => {
+              
                 this.setState({
                     ...item
                 });
@@ -37,7 +47,7 @@ class ItemPage extends React.PureComponent{
     }
 
     handleBuy = () => {
-      console.log("buy");
+      toast.success("toode lisatud", {position: "bottom-center"});
       this.props.dispatch(addItem(this.state));
     } 
     
