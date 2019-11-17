@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import auth_consumer from "./authConsumer.jsx";
 import {connect} from "react-redux";
 
-const imgPath = "/img";
+const imgPath = "/static/img/";
 
 const ProfileIcon = () => {
   return(
     <Link to={"/login"}>
-        <button className="loginButton" id="loginButton"><img src="/img/user.png" className="carticon" />Login/Signup</button>
+        <button className="loginButton" id="loginButton"><img src= {imgPath + "user.png"} className="carticon" />Login/Signup</button>
     </Link>
   );
 };
@@ -18,7 +18,7 @@ const ProfileIcon = () => {
 const WelcomeIcon = ({user}) => {
   return(
     <Link to={"/users/"+user._id}>
-     <button className="loginButton" id="loginButton"><img src={imgPath+"/user.png"} className="carticon" />Welcome, {user.email}</button>
+     <button className="loginButton" id="loginButton"><img src={imgPath+"user.png"} className="carticon" />Welcome, {user.email}</button>
     </Link>
   );
 };
@@ -26,7 +26,7 @@ const WelcomeIcon = ({user}) => {
 const Cart = () =>{
   return(
     <Link to={"/cart"}>
-    <button className="cart" id="cart"><img src={imgPath+"/cart.png"} className="carticon" />Shopping Cart</button>
+    <button className="cart" id="cart"><img src={imgPath+"cart.png"} className="carticon" />Shopping Cart</button>
     </Link>
   );
 };
@@ -46,7 +46,7 @@ const Header = ({user, cart}) => {
   return (
     <div className="header">
       <Link to={"/"} className="logohover">
-        <img src={imgPath+"/tlu.png"} alt="tlu logo" className="logo" />
+        <img src={imgPath+"tlu.png"} alt="tlu logo" className="logo" />
       </Link>
       <div className="headerButtons" id="headerButtons">
         {user.email && <WelcomeIcon user={user} />}
