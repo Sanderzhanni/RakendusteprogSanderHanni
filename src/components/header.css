@@ -75,6 +75,20 @@
     }
  }
  @media only screen and (min-width: 1241px){
+
+    .item-count{
+        position: absolute;
+        margin-left: -12px;
+        border: solid brown 2px;
+        padding: 2px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        border-radius: 100px;
+        background-color: crimson;
+        color: white;
+    }
+
     .header {
         background-color: #4C4C4C;
         padding: 15px 30px;

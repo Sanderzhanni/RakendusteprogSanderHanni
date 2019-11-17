@@ -34,7 +34,7 @@ const Cart = () =>{
 const Badge = ({children}) =>{
   if(children === 0) return null;
   return(
-    <span>{children}</span>
+    <span ><p className="item-count">{children}</p></span>
   );
 };
 

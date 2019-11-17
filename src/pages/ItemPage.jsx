@@ -47,7 +47,9 @@ class ItemPage extends React.PureComponent{
           <div className="content">
             <div className="product-item">
               <div>
-                <div className="title-item">{this.state.title}</div>
+                <div className="title-item">{this.state.title}
+                <hr/>
+                </div>
                 <div className="container-item">
                   <img className="image-item" src={this.state.imgSrc}/>
                   <div className="description-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
