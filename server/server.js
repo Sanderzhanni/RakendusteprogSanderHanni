@@ -22,11 +22,11 @@ app.use("/api/v1", itemRouter);
 app.use("/api/v1/users", userRouter);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../dist/static', 'index.html'));
 });
 
 app.get('/items/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../dist/static", "index.html"));
 });
 
 /** For images and bundle.js */
