@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { userProptypes } from "../store/reducer";
 import { tokenUpdate, userUpdate } from "../store/actions";
-//import auth_consumer from "../components/authConsumer.jsx";
-//import prodectedRedirect from "../components/prodectedRedirect.jsx";
+import prodectedRedirect from "../components/prodectedRedirect.jsx";
 
 class UserPage extends React.PureComponent{
 
@@ -40,6 +39,4 @@ const mapStateToProps = (store) =>{
     };
 };
 
-export default connect(mapStateToProps)(UserPage);
-
-//export default auth_consumer(prodectedRedirect(UserPage));
+export default connect(mapStateToProps)(prodectedRedirect(UserPage));
