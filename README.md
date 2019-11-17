@@ -33,6 +33,7 @@
 * Kasutajad saavad kasutada wishlisti: Neile saadetakse teave, kui toote, mis on nende wishlistis, hinda alandatakse
 * On võimalik esitada tellimusi
 * Osutkorvis pakutakse kasutajale related tooteid :heavy_check_mark:
+* Kasutajale antakse tagasisidet kas sisselogimine ja kasutajaloomine oli edukas või mitte 
 
 ## Tehniline küsimus
 

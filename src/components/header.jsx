@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
 import PropTypes from "prop-types";
-import auth_consumer from "./authConsumer.jsx";
 import {connect} from "react-redux";
+import { userProptypes } from "../store/reducer";
 
 const imgPath = "/static/img/";
 
@@ -49,8 +49,8 @@ const Header = ({user, cart}) => {
         <img src={imgPath+"tlu.png"} alt="tlu logo" className="logo" />
       </Link>
       <div className="headerButtons" id="headerButtons">
-        {user.email && <WelcomeIcon user={user} />}
-        {!user.email && <ProfileIcon />}
+        {user && <WelcomeIcon user={user} />}
+        {!user && <ProfileIcon />}
         <Cart />
         <Badge>{cart.length}</Badge>
       </div>
@@ -60,7 +60,7 @@ const Header = ({user, cart}) => {
 
 Header.propTypes = {
   token: PropTypes.string,
-  user: PropTypes.object,
+  user: PropTypes.shape(userProptypes),
   cart: PropTypes.arrayOf(ItemProps).isRequired,
 };
 
@@ -74,16 +74,18 @@ const ItemProps = {
 };
 
 WelcomeIcon.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.shape(userProptypes)
 };
 
 const mapStateToProps = (store) =>{
   return{
     cart: store.cart,
+    user: store.user,
+
   };
     
 };
 
-export default connect(mapStateToProps)(auth_consumer(Header));
+export default connect(mapStateToProps)(Header);
 
 //fix

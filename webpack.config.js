@@ -1,34 +1,35 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const  {CleanWebpackPlugin}  = require('clean-webpack-plugin');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const  {CleanWebpackPlugin}  = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: './src/app.jsx',
+  entry: "./src/app.jsx",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'static/bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "static/bundle.js"
   },
+  devtool: "eval-source-map",
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
       proxy: {
-          '/api': 'http://localhost:3000'
+          "/api": "http://localhost:3000"
       }
   },
   module: {
       rules: [
           {
               test: /\.css$/i,
-              use: ['style-loader', 'css-loader'],
+              use: ["style-loader", "css-loader"],
           },
           {
-              enforce: 'pre',
+              enforce: "pre",
               test: /\.(js|jsx)$/,
               exclude: /node_modules/,
-              loader: 'eslint-loader',
+              loader: "eslint-loader",
               options: {
               
                failOnError: true,

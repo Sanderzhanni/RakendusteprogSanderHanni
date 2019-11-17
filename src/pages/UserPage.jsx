@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import auth_consumer from "../components/authConsumer.jsx";
-import prodectedRedirect from "../components/prodectedRedirect.jsx";
+import {connect} from "react-redux";
+import { userProptypes } from "../store/reducer";
+//import auth_consumer from "../components/authConsumer.jsx";
+//import prodectedRedirect from "../components/prodectedRedirect.jsx";
 
 class UserPage extends React.PureComponent{
 
     static propTypes = {
-        user: PropTypes.object.isRequired,
+        user: PropTypes.shape(userProptypes),
     }
     render(){
         return(
@@ -22,4 +24,12 @@ class UserPage extends React.PureComponent{
     }
 }
 
-export default auth_consumer(prodectedRedirect(UserPage));
+const mapStateToProps = (store) =>{
+    return {
+        user:store.user,
+    };
+};
+
+export default connect(mapStateToProps)(UserPage);
+
+//export default auth_consumer(prodectedRedirect(UserPage));

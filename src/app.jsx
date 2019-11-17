@@ -17,35 +17,15 @@ import NotFound from "./pages/NotFound.jsx";
 
 const {store, persistor} = configureStore();
 
-const auth_default_value = {
-  token: null,
-    user:{
-      email: null,
-      _id: null,
-      created_at: null,
-    },
-};
 
-export const Auth_context = React.createContext(auth_default_value);
 
 class App extends React.Component{
-
-  state = auth_default_value;
-
-  handleLogin = ({token, user}) =>{
-    this.setState({
-      user, token
-    });
-  };
-
-
 
   render() {
     return (
 
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-        <Auth_context.Provider value={this.state}>
         <BrowserRouter>
 
           <Route path={"/"} component={Header}/>
@@ -53,11 +33,7 @@ class App extends React.Component{
           <Switch>
 
             <Route path="/" exact component={HomePage} />
-            <Route
-              path="/login"
-              exact
-              render={(props) => <LoginPage {...props} onLogin={this.handleLogin} />}
-            />
+            <Route path="/login" exact component={LoginPage}/>
             <Route path="/signup" exact component={SignupPage} />
             <Route path={"/cart"} component={StorePage}/>
             <Route path="/users/:userId" exact component={UserPage}/>
@@ -68,7 +44,6 @@ class App extends React.Component{
           </Switch>
 
         </BrowserRouter>
-      </Auth_context.Provider>
       </PersistGate>
       </Provider>
 
