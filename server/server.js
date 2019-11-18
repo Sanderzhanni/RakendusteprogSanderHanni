@@ -4,6 +4,8 @@ const apiRouter = require("./apiRouter.js");
 const PORT = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const DB = require("./DB.connection.js");
+//const swaggerUi = require("swagger-ui-express");
+//const swaggerDocument = require("../default.yaml");
 
 require("dotenv").config();
 
@@ -14,6 +16,7 @@ if(process.env.NODE_ENV !== "production"){
 
 app.use(bodyParser.json());
 app.use(apiRouter);
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /** For images and bundle.js */
 app.use("/static", express.static("dist/static"));

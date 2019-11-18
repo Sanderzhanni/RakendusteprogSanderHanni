@@ -22,7 +22,8 @@
     "react-toastify": "^5.4.1",
     "redux": "^4.0.4",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -51,7 +52,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "node server/server.js",
-    "start:prelive": "npm run build && set PORT=3001 npm run start",
+    "start:prelive": "npm run build && set PORT=3001 && npm run start",
     "start:backend": "nodemon ./server/server.js",
     "start:frontend": "webpack-dev-server --open --mode=\"development\"",
     "lint": "eslint --version"

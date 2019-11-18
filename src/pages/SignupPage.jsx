@@ -34,9 +34,11 @@ class SignupPage extends React.PureComponent{
             },
         })
         .then(res =>{
-            res.json();
+            if(!res.ok) throw "signup failed";
+            return res.json();
         })
         .then( () =>{
+            toast.success("Kasutaja loomine õnnestus", {position: "bottom-center", pauseOnHover: false});
             this.props.history.push("/login");
         })
         .catch((err) =>{

@@ -27,6 +27,19 @@ paths:
           description: Forbidden
         500:
           description: err
+  /items:
+    get:
+      operationId: getItems
+      summary: Returns a list of items
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        500:
+          description: err
   /items/{itemId}:
     get:
       operationId: getItem
