@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
+const apiRouter = require("./apiRouter.js");
 const PORT = process.env.PORT || 3000;
-const authRouter = require("./auth.router.js");
-const itemRouter = require("./item.router.js");
-const userRouter = require("./user.router.js");
 const bodyParser = require("body-parser");
 const DB = require("./DB.connection.js");
 
@@ -15,10 +13,7 @@ if(process.env.NODE_ENV !== "production"){
   }
 
 app.use(bodyParser.json());
-
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1", itemRouter);
-app.use("/api/v1/users", userRouter);
+app.use(apiRouter);
 
 /** For images and bundle.js */
 app.use("/static", express.static("dist/static"));

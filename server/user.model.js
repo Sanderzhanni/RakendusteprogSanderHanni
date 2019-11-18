@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     hash: { type: String, required: true },
     created_at: { type: Date, default: Date.now },
+    cart: {type: [String], default: [] },
 });
 
 
@@ -25,7 +26,8 @@ userSchema.statics.login = function ({
                 resolve({
                     _id: userDoc._id,
                     email: userDoc.email,
-                    created_at: userDoc.created_at
+                    created_at: userDoc.created_at,
+                    cart: userDoc.cart
                 });
             });
         });

@@ -5,7 +5,7 @@ const Item = require("./item.model.js");
 
 
 //fetch
-router.get("/items", (req, res) => {
+router.get("/", (req, res) => {
     Item.find({}, function (err, items){
         if(err) {
             console.log("Error", err);
@@ -19,7 +19,7 @@ router.get("/items", (req, res) => {
 
 
 //Delete
-router.delete("/items/:itemId", (req, res) => {
+router.delete("/:itemId", (req, res) => {
     Item.deleteOne({ "_id": mongoose.Types.ObjectId(req.params.itemId) }, (err) => {
         if (err) {
             return console.log("Error", err);
@@ -30,8 +30,8 @@ router.delete("/items/:itemId", (req, res) => {
     });
 });
 
-//fetch item id
-router.get("/items/:itemId", (req, res) => {
+//Return an item
+router.get("/:itemId", (req, res) => {
     Item.findById(req.params.itemId, function (err, item) {
         if (err) {
             console.log("error: ", err);
@@ -39,7 +39,6 @@ router.get("/items/:itemId", (req, res) => {
         }
         res.send(item);
     });
-    //res.send(DB.getItem(req.params.itemId));
 });
 
 module.exports = router;
