@@ -35,7 +35,7 @@ router.get("/:itemId", (req, res) => {
     Item.findById(req.params.itemId, function (err, item) {
         if (err) {
             console.log("error: ", err);
-            res.send(err);
+            return res.send(err);
         }
         res.send(item);
     });
