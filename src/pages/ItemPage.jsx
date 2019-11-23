@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {addItem} from "../store/actions.js";
 import {toast} from "react-toastify";
 import "../components/itempage.css";
+import * as services from "../services";
 
 
 class ItemPage extends React.PureComponent {
@@ -30,20 +31,16 @@ class ItemPage extends React.PureComponent {
     }
 
     fetchItem = () => {
-        fetch("/api/v1/items/" + this.props.match.params.itemId + "")
-            .then(res => {
+        services.getItem({itemId: this.props.match.params.itemId})
+        .then(item => {
 
-                return res.json();
-            })
-            .then(item => {
-
-                this.setState({
-                    ...item
-                });
-            })
-            .catch(err => {
-                console.log("err", err);
+            this.setState({
+                ...item
             });
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
     };
 
     handleBuy = () => {

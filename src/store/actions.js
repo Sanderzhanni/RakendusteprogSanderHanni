@@ -1,3 +1,5 @@
+import * as services from "../services";
+
 //const USER_SUCCESS = "USER_SUCCESS";
 //const USER_FAILURE = "USER_FAILURE";
 //const USER_REQUEST = "USER_REQUEST";
@@ -14,12 +16,8 @@ export const TOKEN_UPDATE = "TOKEN_UPDATE";
 export const getItems = () => (dispatch, getState) => {
 
     if (getState().items.length > 0) return null;
-
     dispatch(itemsRequest());
-    return fetch("/api/v1/items")
-        .then(res => {
-            return res.json();
-        })
+    return services.getItems()
         .then(items => {
             dispatch(itemsSuccess(items));
         })

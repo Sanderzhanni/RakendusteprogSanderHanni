@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {userUpdate} from "../store/actions";
 import {toast} from "react-toastify";
+import * as services from "../services";
 
 class LoginPage extends React.PureComponent {
 
@@ -29,23 +30,15 @@ class LoginPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/v1/auth/login", {
-            method: "POST",
-            body: JSON.stringify(this.state),
-            headers: {
-                "Content-Type": "application/json"
-            },
-        })
-            .then(res => (res.json()))
-            .then(this.handleSuccess)
-            .catch(err => {
-                console.log("err", err);
-                toast.error("Sisselogimine ebaõnnestus", {position: "top-center", pauseOnHover: false});
-            });
+        services.login(this.state)
+        .then(this.handleSuccess)
+        .catch(err => {
+            console.log("err", err);
+            toast.error("Sisselogimine ebaõnnestus", {position: "top-center", pauseOnHover: false});
+        });
     };
 
     handleSuccess = ({user}) => {
-        console.log("ss");
         this.props.dispatch(userUpdate(user));
         this.props.history.push("/users/" + user._id);
     };

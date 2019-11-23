@@ -3,6 +3,7 @@ import "./Form.css";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {toast} from "react-toastify";
+import * as services from "../services";
 
 class SignupPage extends React.PureComponent {
 
@@ -26,25 +27,15 @@ class SignupPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/v1/auth/signup", {
-            method: "POST",
-            body: JSON.stringify(this.state),
-            headers: {
-                "Content-Type": "application/json"
-            },
+        services.signup(this.state)
+        .then(() => {
+            toast.success("Kasutaja loomine õnnestus", {position: "bottom-center", pauseOnHover: false});
+            this.props.history.push("/login");
         })
-            .then(res => {
-                if (!res.ok) throw "signup failed";
-                return res.json();
-            })
-            .then(() => {
-                toast.success("Kasutaja loomine õnnestus", {position: "bottom-center", pauseOnHover: false});
-                this.props.history.push("/login");
-            })
-            .catch((err) => {
-                console.log("err", err);
-                toast.error("Kasutaja loomine ebaõnnestus", {position: "bottom-center", pauseOnHover: false});
-            });
+        .catch((err) => {
+            console.log("err", err);
+            toast.error("Kasutaja loomine ebaõnnestus", {position: "bottom-center", pauseOnHover: false});
+        });
     };
 
     render() {
