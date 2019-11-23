@@ -1,33 +1,33 @@
 import React from "react";
 import "./Form.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import { userUpdate } from "../store/actions";
+import {userUpdate} from "../store/actions";
 import {toast} from "react-toastify";
 
-class LoginPage extends React.PureComponent{
+class LoginPage extends React.PureComponent {
 
     static propTypes = {
         history: PropTypes.object.isRequired,
         dispatch: PropTypes.func.isRequired,
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            email:"",
-            password:"",
+            email: "",
+            password: "",
         };
     }
 
-    handleChange = (e) =>{
+    handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
-    handleSubmit = (e) =>{
+    handleSubmit = (e) => {
         e.preventDefault();
         fetch("/api/v1/auth/login", {
             method: "POST",
@@ -36,15 +36,15 @@ class LoginPage extends React.PureComponent{
                 "Content-Type": "application/json"
             },
         })
-        .then( res =>(res.json()))
-        .then(this.handleSuccess)
-        .catch(err =>{
-            console.log("err", err);
-            toast.error("Sisselogimine ebaõnnestus", {position: "top-center", pauseOnHover: false});
-        });
-    }
+            .then(res => (res.json()))
+            .then(this.handleSuccess)
+            .catch(err => {
+                console.log("err", err);
+                toast.error("Sisselogimine ebaõnnestus", {position: "top-center", pauseOnHover: false});
+            });
+    };
 
-    handleSuccess = ({user}) =>{
+    handleSuccess = ({user}) => {
         console.log("ss");
         this.props.dispatch(userUpdate(user));
         this.props.history.push("/users/" + user._id);
@@ -72,7 +72,7 @@ class LoginPage extends React.PureComponent{
                         />
                         <button>login</button>
                         <p className="message">Not registered?
-                        <Link to={"/signup"}> Create an account</Link>
+                            <Link to={"/signup"}> Create an account</Link>
                         </p>
                     </form>
                 </div>

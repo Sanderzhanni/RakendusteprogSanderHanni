@@ -6,14 +6,14 @@ const Checkbox = ({name, onChange, checked}) => {
     return (
         <label className="toggle" htmlFor={name}>
             {name}
-          <input
-                    name={name}
-                    type="checkbox"
-                    id="toggle"
-                    className="option-input checkbox"
-                    checked={checked}
-                    onChange={onChange} />
-                </label>
+            <input
+                name={name}
+                type="checkbox"
+                id="toggle"
+                className="option-input checkbox"
+                checked={checked}
+                onChange={onChange}/>
+        </label>
 
     );
 };

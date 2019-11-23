@@ -20,7 +20,7 @@ const utils = require("./utils.js");
 
 
 
-const isNumberValid = (inputString, { precision = 9, scale = 0 }) => {
+const isNumberValid = (inputString, {precision = 9, scale = 0}) => {
 
     let [before, after] = inputString.split(".");
     after = after ? after.length : 0;
@@ -34,15 +34,15 @@ const isNumberValid = (inputString, { precision = 9, scale = 0 }) => {
     return true;
 };
 
-utils.test(isNumberValid("200.345",{}), false); // scale default value is 0
-utils.test(isNumberValid("200.345",{scale: 10}), true);
-utils.test(isNumberValid("200.345",{precision: 3, scale: 10}), false);
-utils.test(isNumberValid("200",{scale: 0}), true);
-utils.test(isNumberValid("200.not",{scale: 0}), false); // not a number
-utils.test(isNumberValid("0",{}), true);
-utils.test(isNumberValid("10.32",{scale: 1}), false);
-utils.test(isNumberValid("10.32",{scale: 3}), true);
-utils.test(isNumberValid("10.",{scale: 3}), false); // not a number
+utils.test(isNumberValid("200.345", {}), false); // scale default value is 0
+utils.test(isNumberValid("200.345", {scale: 10}), true);
+utils.test(isNumberValid("200.345", {precision: 3, scale: 10}), false);
+utils.test(isNumberValid("200", {scale: 0}), true);
+utils.test(isNumberValid("200.not", {scale: 0}), false); // not a number
+utils.test(isNumberValid("0", {}), true);
+utils.test(isNumberValid("10.32", {scale: 1}), false);
+utils.test(isNumberValid("10.32", {scale: 3}), true);
+utils.test(isNumberValid("10.", {scale: 3}), false); // not a number
 
 /**
  * Task 2
@@ -63,12 +63,12 @@ const sumCallback = (a, b, cb) => {
 /**
  * Utility function. Don't change me!
  */
-function myCallback(x){
-  return "hello-"+x;
+function myCallback(x) {
+    return "hello-" + x;
 }
 
-utils.test( sumCallback(2,3, myCallback), "hello-5");
-utils.test( sumCallback(0,-2, myCallback), "hello--2");
+utils.test(sumCallback(2, 3, myCallback), "hello-5");
+utils.test(sumCallback(0, -2, myCallback), "hello--2");
 
 /**
  * Task 3
@@ -84,13 +84,12 @@ utils.test( sumCallback(0,-2, myCallback), "hello--2");
 const add = (a) => {
     return function (b) {
         return a + b;
-    }
+    };
 };
 
-try{
-  utils.test( add(2)(3),5 );
-  utils.test( add(0)(0),0 );
-}
-catch(e){
-  console.log("FAIL: implement task 3")
+try {
+    utils.test(add(2)(3), 5);
+    utils.test(add(0)(0), 0);
+} catch (e) {
+    console.log("FAIL: implement task 3");
 }

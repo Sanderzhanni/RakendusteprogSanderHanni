@@ -1,8 +1,6 @@
-body{
-  margin: auto;
+body {
+    margin: auto;
 }
-
-
 
 
 @media only screen and (max-width: 1240px) {
@@ -13,9 +11,9 @@ body{
         margin: 0 auto;
     }
 
-        .content a {
-            text-decoration: none;
-        }
+    .content a {
+        text-decoration: none;
+    }
 
     .product {
         display: flex;
@@ -27,17 +25,17 @@ body{
         padding: 10px;
     }
 
-        .product:hover {
-            transition-duration: 0.5s;
-            transform: scale(1.05);
-            box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
-        }
+    .product:hover {
+        transition-duration: 0.5s;
+        transform: scale(1.05);
+        box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
+    }
 
-        .product img {
-            width: 20%;
-            height: 10%;
-            padding: 10px;
-        }
+    .product img {
+        width: 20%;
+        height: 10%;
+        padding: 10px;
+    }
 
     .productTitle {
         font-size: 18px;
@@ -78,13 +76,13 @@ body{
         border-radius: 2px;
     }
 
-    .items-settings{
+    .items-settings {
         display: flex;
         justify-content: flex-end;
         margin: 10px 12vw 40px 12vw;
     }
 
-    .foundItems{
+    .foundItems {
         display: flex;
         justify-content: left;
         margin: 10px 12vw 0px 12vw;
@@ -95,7 +93,7 @@ body{
 }
 
 
-@media only screen and (min-width: 1241px){
+@media only screen and (min-width: 1241px) {
     .content {
         padding-top: 50px;
         display: flex;
@@ -105,9 +103,9 @@ body{
         margin: 0 auto;
     }
 
-        .content a {
-            text-decoration: none;
-        }
+    .content a {
+        text-decoration: none;
+    }
 
     .product {
         box-shadow: 1px 2px 2px 1px #9C7D8F;
@@ -118,19 +116,19 @@ body{
         margin-top: 20px;
     }
 
-        .product:hover {
-            transition-duration: 0.5s;
-            transform: scale(1.05);
-            box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
-        }
+    .product:hover {
+        transition-duration: 0.5s;
+        transform: scale(1.05);
+        box-shadow: 0px 5px 10px 0px rgba(111, 111, 111, 0.4);
+    }
 
-        .product img {
-            width: 225px;
-            height: 200px;
-            padding: 10px;
-            display:block;
-            margin:auto;
-        }
+    .product img {
+        width: 225px;
+        height: 200px;
+        padding: 10px;
+        display: block;
+        margin: auto;
+    }
 
     .productTitle {
         font-size: 18px;
@@ -171,13 +169,13 @@ body{
         border-radius: 2px;
     }
 
-    .items-settings{
+    .items-settings {
         display: flex;
         justify-content: flex-end;
         margin: 10px 12vw 40px 12vw;
     }
 
-    .foundItems{
+    .foundItems {
         display: flex;
         justify-content: left;
         margin: 10px 12vw 0px 12vw;

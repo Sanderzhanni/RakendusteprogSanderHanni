@@ -1,5 +1,4 @@
-
- @media only screen and (max-width: 1240px){
+@media only screen and (max-width: 1240px) {
     .header {
         background-color: #4C4C4C;
         padding: 15px 30px;
@@ -15,25 +14,25 @@
         opacity: 0.98;
     }
 
-  
-    .logohover{
-        background-color:transparent;
+
+    .logohover {
+        background-color: transparent;
     }
-    
+
     .logo {
         width: 40px;
         height: 40px;
     }
-    
+
     .logo a {
         text-decoration: none;
     }
-    
+
     .headerButtons {
         height: 40px;
         display: flex;
     }
-    
+
     .headerButtons button {
         background-color: #6F6F6F;
         border: none;
@@ -43,13 +42,13 @@
         box-shadow: 0px 2px 1px 0px rgba(111, 111, 111, 0.4);
         padding-right: 15px;
     }
-    
+
     .headerButtons button:hover {
         background-color: #8B8B8B;
         transition-duration: 0.2s;
         transform: scale(1.02);
     }
-    
+
     .carticon {
         width: 25px;
         height: 25px;
@@ -57,26 +56,27 @@
         padding-left: 5px;
         vertical-align: middle;
     }
-    
+
     .cart, .loginButton {
         font-size: 12px;
         height: 50px;
         padding-bottom: 42px;
     }
 
-    .cart{
+    .cart {
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
     }
 
-    .loginButton{
+    .loginButton {
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
     }
- }
- @media only screen and (min-width: 1241px){
+}
 
-    .item-count{
+@media only screen and (min-width: 1241px) {
+
+    .item-count {
         position: absolute;
         margin-left: -12px;
         border: solid brown 2px;
@@ -103,25 +103,25 @@
         z-index: 1;
         opacity: 0.98;
     }
-    
-    .logohover{
-        background-color:transparent;
+
+    .logohover {
+        background-color: transparent;
     }
-    
+
     .logo {
         width: 65px;
-        height: 65px;   
+        height: 65px;
     }
-    
+
     .logo a {
         text-decoration: none;
     }
-    
+
     .headerButtons {
         height: 40px;
         display: flex;
     }
-    
+
     .headerButtons button {
         background-color: #6F6F6F;
         border: none;
@@ -130,13 +130,13 @@
         box-shadow: 0px 2px 1px 0px rgba(111, 111, 111, 0.4);
         padding-right: 15px;
     }
-    
+
     .headerButtons button:hover {
         background-color: #8B8B8B;
         transition-duration: 0.2s;
         transform: scale(1.02);
     }
-    
+
     .carticon {
         width: 25px;
         height: 25px;
@@ -144,19 +144,19 @@
         padding-left: 5px;
         vertical-align: middle;
     }
-    
+
     .cart, .loginButton {
         font-size: 16px;
         height: 40px;
     }
 
-    .cart{
+    .cart {
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
     }
 
-    .loginButton{
+    .loginButton {
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
     }
- }
+}

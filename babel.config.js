@@ -1,10 +1,10 @@
 const presets = [
-  [
-    "@babel/env",
-  ],
-  [
-   "@babel/preset-react"
- ],
+    [
+        "@babel/env",
+    ],
+    [
+        "@babel/preset-react"
+    ],
 
 ];
 
@@ -12,4 +12,4 @@ const plugins = [
     "@babel/plugin-proposal-class-properties"
 ];
 
-module.exports = { presets, plugins };
+module.exports = {presets, plugins};

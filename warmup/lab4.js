@@ -3,7 +3,7 @@ const utils = require("./utils");
 /**
  * Task 1
  *
- * Kirjutage funktsioon, mis tagastab 2 sekundi pärast "hello"
+ * Kirjutage funktsioon, mis tagastab 2 sekundi pï¿½rast "hello"
  *
  * Tip. Peate kasutama Promise ja setTimeout
  */
@@ -22,11 +22,10 @@ try {
             utils.test(x, "hello");
         })
         .catch(() => {
-            console.log("Fail")
+            console.log("Fail");
         });
 
-}
-catch (e) {
+} catch (e) {
     console.log("Fail, function is not implemented");
 }
 

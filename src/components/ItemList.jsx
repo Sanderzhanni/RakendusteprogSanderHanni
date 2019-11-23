@@ -1,44 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 
-
 const ItemList = (props) => {
-  return(
-    <div className = "content">
-      {
-        props.items.map(item =>{
-          return <Item
-            key={item._id}
-            id={item._id}
-            imgSrc={item.imgSrc}
-            title={item.title}
-            price={item.price}
-            quantity={1}
-          />;
-        })
-      }
+    return (
+        <div className="content">
+            {
+                props.items.map(item => {
+                    return <Item
+                        key={item._id}
+                        id={item._id}
+                        imgSrc={item.imgSrc}
+                        title={item.title}
+                        price={item.price}
+                        quantity={1}
+                    />;
+                })
+            }
 
-    </div>
-  );
+        </div>
+    );
 };
 
 ItemList.propTypes = {
     items: PropTypes.array
 };
 
-const Item = (props) =>{
-  return(
-    <Link to={"/items/"+props.id+""}>
-    <div className="product">
-        <img className="img" src={props.imgSrc}/>
-        <div className="productTitle">{props.title}</div>
-        <div className="productPrice">${props.price}</div>
-    </div>
-    </Link>
+const Item = (props) => {
+    return (
+        <Link to={"/items/" + props.id + ""}>
+            <div className="product">
+                <img className="img" src={props.imgSrc}/>
+                <div className="productTitle">{props.title}</div>
+                <div className="productPrice">${props.price}</div>
+            </div>
+        </Link>
 
-  );
+    );
 };
 
 Item.propTypes = {

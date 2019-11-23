@@ -5,17 +5,17 @@ info:
   version: "1.0.0"
 servers:
   - url: localhost:3000/api/v1
-security: 
+security:
   - bearerAuth: []
 paths:
   /users/{userId}:
     get:
       operationId: getUser
       summary: Returns an user object
-      security: 
+      security:
         - bearerAuth: []
       parameters:
-         - $ref: "#/components/parameters/userIdparam"
+        - $ref: "#/components/parameters/userIdparam"
       responses:
         200:
           description: OK
@@ -45,7 +45,7 @@ paths:
       operationId: getItem
       summary: Returns an item
       parameters:
-         - $ref: "#/components/parameters/itemIdparam"
+        - $ref: "#/components/parameters/itemIdparam"
       responses:
         200:
           description: OK
@@ -53,15 +53,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Item"
-        401:
-          description: Forbidden
         500:
           description: err
   /users/{userId}/cart/{itemId}:
     put:
       operationId: addItemToCart
       summary: Adds an item to the cart
-      security: 
+      security:
         - bearerAuth: []
       parameters:
         - $ref: "#/components/parameters/userIdparam"
@@ -76,7 +74,7 @@ paths:
     delete:
       operationId: removeItemFromCart
       summary: Removes an item from the cart
-      security: 
+      security:
         - bearerAuth: []
       parameters:
         - $ref: "#/components/parameters/userIdparam"
@@ -88,7 +86,7 @@ paths:
           description: Forbidden
         500:
           description: err
-  /login:
+  /auth/login:
     post:
       operationId: login
       summary: User signs in
@@ -127,7 +125,7 @@ paths:
           description: bad email or password
         401:
           description: unauthorized
-  /signup:
+  /auth/signup:
     post:
       operationId: signup
       summary: User creates an account

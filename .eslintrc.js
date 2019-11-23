@@ -4,8 +4,8 @@ module.exports = {
         "node": true,
     },
     "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "settings": {
         "react": {
@@ -14,12 +14,12 @@ module.exports = {
 
     },
 
-  "rules": {
-    "semi": ["error", "always"],
-    "quotes": ["error", "double"]
-  },
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
+    },
     "parserOptions": {
-        
+
         "ecmaVersion": 2019,
         "sourceType": "module",
     },

@@ -10,9 +10,9 @@ const DB = require("./DB.connection.js");
 require("dotenv").config();
 
 /** Development environment. In Heroku we don't use .env file */
-if(process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
-  }
+}
 
 app.use(bodyParser.json());
 app.use(apiRouter);
@@ -25,12 +25,12 @@ app.use("/static", express.static("dist/static"));
 app.use("/*", express.static("dist"));
 
 DB.connect()
-.then(()=>{
-    listen();
-})
-.catch((err)=>{
-    console.log("Something went wrong", err);
-});
+    .then(() => {
+        listen();
+    })
+    .catch((err) => {
+        console.log("Something went wrong", err);
+    });
 
 
 function listen() {

@@ -3,8 +3,8 @@
     box-shadow: 3px 5px 3px 0px rgba(111, 111, 111, 0.4);
 }
 
-.title-item{
-  font-size: 24px;
+.title-item {
+    font-size: 24px;
 }
 
 .container-item {
@@ -24,7 +24,7 @@
     justify-self: center;
 }
 
-.description-item{
+.description-item {
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -44,7 +44,7 @@
     margin: 10px;
 }
 
-.price-item{
+.price-item {
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 2;
@@ -73,11 +73,11 @@
 
 .btn-item:hover {
     -webkit-transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
-	transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
-	color: #ECEFF1;
-	background-color: #ea262c;
-	-webkit-animation: anim-moema-1 0.3s forwards;
-	animation: anim-moema-1 0.3s forwards;
+    transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
+    color: #ECEFF1;
+    background-color: #ea262c;
+    -webkit-animation: anim-moema-1 0.3s forwards;
+    animation: anim-moema-1 0.3s forwards;
 }
 
 .btn-item:after {
@@ -92,38 +92,38 @@
     border-radius: 100%;
     transform: scale(1, 1) translate(-50%);
     transform-origin: 50% 50%;
-  }
+}
 
 .btn-item:focus:not(:active)::after {
     animation: ripple 1s ease-out;
-  }
+}
 
 @-webkit-keyframes anim-moema-1 {
-	60% {
-		-webkit-transform: scale3d(0.8, 0.8, 1);
-		transform: scale3d(0.8, 0.8, 1);
-	}
-	85% {
-		-webkit-transform: scale3d(1.1, 1.1, 1);
-		transform: scale3d(1.1, 1.1, 1);
-	}
-	100% {
-		-webkit-transform: scale3d(1, 1, 1);
-		transform: scale3d(1, 1, 1);
-	}
+    60% {
+        -webkit-transform: scale3d(0.8, 0.8, 1);
+        transform: scale3d(0.8, 0.8, 1);
+    }
+    85% {
+        -webkit-transform: scale3d(1.1, 1.1, 1);
+        transform: scale3d(1.1, 1.1, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
 }
 
 @keyframes ripple {
     0% {
-      transform: scale(0, 0);
-      opacity: 1;
+        transform: scale(0, 0);
+        opacity: 1;
     }
     20% {
-      transform: scale(25, 25);
-      opacity: 1;
+        transform: scale(25, 25);
+        opacity: 1;
     }
     100% {
-      opacity: 0;
-      transform: scale(40, 40);
+        opacity: 0;
+        transform: scale(40, 40);
     }
-  }
+}
