@@ -4,6 +4,7 @@ import "./header.css";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {userProptypes} from "../store/reducer";
+import * as selectors from "../store/selectors";
 
 const imgPath = "/static/img/";
 
@@ -82,8 +83,8 @@ WelcomeIcon.propTypes = {
 
 const mapStateToProps = (store) => {
     return {
-        cart: store.cart,
-        user: store.user,
+        cart: selectors.getCart(store),
+        user:selectors.getUser(store)
 
     };
 

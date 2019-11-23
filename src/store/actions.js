@@ -1,4 +1,5 @@
 import * as services from "../services";
+import * as selectors from "./selectors";
 
 //const USER_SUCCESS = "USER_SUCCESS";
 //const USER_FAILURE = "USER_FAILURE";
@@ -14,8 +15,8 @@ export const TOKEN_UPDATE = "TOKEN_UPDATE";
 
 
 export const getItems = () => (dispatch, getState) => {
-
-    if (getState().items.length > 0) return null;
+    const store = getState();
+    if (selectors.getItems(store).length > 0) return null;
     dispatch(itemsRequest());
     return services.getItems()
         .then(items => {
