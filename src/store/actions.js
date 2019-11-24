@@ -61,10 +61,23 @@ export const addItem = (item) => (dispatch, getState) => {
     });
 };
 
-export const removeItem = (_id) => ({
-    type: ITEM_REMOVED,
-    payload: _id,
-});
+export const removeItem = (itemId) => (dispatch, getState) =>{
+    const store = getState();
+    const userId = selectors.getUser(store)._id;
+    const token = selectors.getToken(store);
+    services.removeItemFromCart({userId, itemId, token})
+        .then(() => {
+            toast.success("toode eemaldatud", {hideProgressBar: true, position: "bottom-right"});
+            dispatch({
+                type: ITEM_REMOVED,
+                payload: itemId
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Toode eemaldamisel tekkis viga!");
+        });
+};
 
 export const userUpdate = (user) => ({
     type: USER_UPDATE,

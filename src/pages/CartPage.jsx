@@ -8,7 +8,6 @@ import "rc-input-number/assets/index.css";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {removeItem} from "../store/actions.js";
-import {toast} from "react-toastify";
 import * as selectors from "../store/selectors";
 import * as services from "../services";
 
@@ -42,11 +41,23 @@ class Cart extends React.PureComponent {
     };
 
     handleRemove = (_id) => {
-        toast.success("toode eemaldatud");
         this.props.dispatch(removeItem(_id));
     };
 
     componentDidMount() {
+        this.fetchRelated();
+        this.fetchItems();
+    }
+
+    componentDidUpdate(prevProps) {
+        const prevPropId = prevProps.cartItemId.join("");
+        const currentId = this.props.cartItemId.join("");
+        if(prevPropId !== currentId){
+            this.fetchItems();
+        }
+    }
+
+    fetchRelated = () => {
         getItems()
             .then(items => {
                 this.setState({
@@ -56,18 +67,21 @@ class Cart extends React.PureComponent {
             .catch(err => {
                 console.log("err", err);
             });
+    };
+
+    fetchItems = () =>{
         const promises = this.props.cartItemId.map(itemId =>
             services.getItem({itemId})
         );
         Promise.all(promises).then(items =>{
-           this.setState({
-               cartItems: items
-           });
+            this.setState({
+                cartItems: items
+            });
         })
-        .catch(err =>{
-           console.log(err);
-        });
-    }
+            .catch(err =>{
+                console.log(err);
+            });
+    };
 
     render() {
         const {tax, withoutTax} = this.calcSum();

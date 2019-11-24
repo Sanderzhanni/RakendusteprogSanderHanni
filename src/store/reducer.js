@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {ITEM_ADDED, ITEMS_SUCCESS, TOKEN_UPDATE, USER_UPDATE} from "./actions";
+import {ITEM_ADDED, ITEM_REMOVED, ITEMS_SUCCESS, TOKEN_UPDATE, USER_UPDATE} from "./actions";
 
 export const userProptypes = {
     _id: PropTypes.string.isRequired,
@@ -33,12 +33,12 @@ export const reducer = (state = initialState, action) => {
                 user: addItemToCart(state.user, action.payload),
             };
         }
-        // case ITEM_REMOVED: {
-        //     return {
-        //         ...state,
-        //         cart: removeItemById(state.cart, action.payload),
-        //     };
-        // }
+        case ITEM_REMOVED: {
+            return {
+                ...state,
+                user: removeItemFromCart(state.user, action.payload),
+            };
+        }
         case ITEMS_SUCCESS: {
             return {
                 ...state,
@@ -58,10 +58,13 @@ const addItemToCart = (user, itemId) =>{
     };
 };
 
-// const removeItemById = (items, _id) => {
-//     const index = items.findIndex(item => item._id === _id);
-//     if (index === -1) return items;
-//     const copy = items.slice();
-//     copy.splice(index, 1);
-//     return copy;
-// };
+const removeItemFromCart = (user, itemId) => {
+    const foundItemIndex = user.cart.findIndex(cartId => cartId === itemId);
+    if(foundItemIndex === -1) return user;
+    const cartCopy = user.cart.slice();
+    cartCopy.splice(foundItemIndex, 1);
+    return {
+        ...user,
+        cart: cartCopy
+    };
+};
