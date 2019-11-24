@@ -10,11 +10,12 @@ import {connect} from "react-redux";
 import {removeItem} from "../store/actions.js";
 import {toast} from "react-toastify";
 import * as selectors from "../store/selectors";
+import * as services from "../services";
 
 class Cart extends React.PureComponent {
 
     static propTypes = {
-        cart: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        cartItemId: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
         dispatch: PropTypes.func.isRequired,
     };
 
@@ -23,12 +24,13 @@ class Cart extends React.PureComponent {
         this.handleClick = this.handleClick.bind(this);
         this.state = {
             related: [],
+            cartItems: []
         };
     }
 
     calcSum = () => {
         const VAT = 20;
-        const withoutTax = Math.round(this.props.cart.reduce((acc, item) => acc + item.price, 0));
+        const withoutTax = Math.round(this.state.cartItems.reduce((acc, item) => acc + item.price, 0));
         const tax = Math.round(withoutTax / 100 * VAT);
         return {
             withoutTax, tax
@@ -48,12 +50,23 @@ class Cart extends React.PureComponent {
         getItems()
             .then(items => {
                 this.setState({
-                    related: (items.filter(item => !this.props.cart.includes(item))).slice(0, 5),
+                    related: (items.filter(item => !this.state.cartItems.includes(item))).slice(0, 5),
                 });
             })
             .catch(err => {
                 console.log("err", err);
             });
+        const promises = this.props.cartItemId.map(itemId =>
+            services.getItem({itemId})
+        );
+        Promise.all(promises).then(items =>{
+           this.setState({
+               cartItems: items
+           });
+        })
+        .catch(err =>{
+           console.log(err);
+        });
     }
 
     render() {
@@ -63,7 +76,7 @@ class Cart extends React.PureComponent {
 
                 <div className="shopping-cart">
                     <div className="title">Shopping Cart</div>
-                    {this.props.cart.map((row, index) => <ItemPurchase onRemove={this.handleRemove}
+                    {this.state.cartItems.map((row, index) => <ItemPurchase onRemove={this.handleRemove}
                                                                        key={index} {...row} />)}
                 </div>
                 <div className="total">
@@ -174,7 +187,7 @@ export const ItemProps = {
 
 const mapStateToProps = (store) => {
     return {
-        cart: selectors.getCart(store)
+        cartItemId: selectors.getCart(store)
     };
 
 };

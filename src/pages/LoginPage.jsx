@@ -3,7 +3,7 @@ import "./Form.css";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {userUpdate} from "../store/actions";
+import {userUpdate, tokenUpdate} from "../store/actions";
 import {toast} from "react-toastify";
 import * as services from "../services";
 
@@ -38,8 +38,9 @@ class LoginPage extends React.PureComponent {
         });
     };
 
-    handleSuccess = ({user}) => {
+    handleSuccess = ({user, token}) => {
         this.props.dispatch(userUpdate(user));
+        this.props.dispatch(tokenUpdate(token));
         this.props.history.push("/users/" + user._id);
     };
 

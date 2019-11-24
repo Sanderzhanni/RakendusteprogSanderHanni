@@ -44,7 +44,6 @@ class ItemPage extends React.PureComponent {
     };
 
     handleBuy = () => {
-        toast.success("toode lisatud", {hideProgressBar: true, position: "bottom-right"});
         this.props.dispatch(addItem(this.state));
     };
 
