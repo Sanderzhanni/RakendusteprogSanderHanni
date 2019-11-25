@@ -9,6 +9,18 @@ import {connect} from "react-redux";
 import {removeItem} from "../store/actions.js";
 import * as selectors from "../store/selectors";
 import * as services from "../services";
+import Modal from "react-modal";
+
+const customStyles = {
+    content : {
+        top                   : "50%",
+        left                  : "50%",
+        right                 : "auto",
+        bottom                : "auto",
+        marginRight           : "-50%",
+        transform             : "translate(-50%, -50%)"
+    }
+};
 
 class Cart extends React.PureComponent {
 
@@ -16,13 +28,16 @@ class Cart extends React.PureComponent {
         cartItemId: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
         dispatch: PropTypes.func.isRequired,
     };
+    
+    
 
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.state = {
             related: [],
-            cartItems: []
+            cartItems: [],
+            showModal: false
         };
     }
 
@@ -36,7 +51,11 @@ class Cart extends React.PureComponent {
     };
 
     handleClick = () => {
-        console.log("Format button");
+        this.setState({ showModal: true });
+    };
+
+    handleCloseModal= () => {
+        this.setState({ showModal: false });
     };
 
     handleRemove = (_id) => {
@@ -44,7 +63,6 @@ class Cart extends React.PureComponent {
     };
 
     componentDidMount() {
-        console.log("com");
         this.fetchRelated();
         this.fetchItems();
     }
@@ -100,7 +118,10 @@ class Cart extends React.PureComponent {
         const {tax, withoutTax} = this.calcSum();
         return (
             <>
-
+                <Modal isOpen={this.state.showModal} style={customStyles}>
+                    <div>Hello world</div>
+                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                </Modal>
                 <div className="shopping-cart">
                     <div className="title">Shopping Cart</div>
                     {this.state.cartItems.map((row, index) => <ItemPurchase onRemove={this.handleRemove}
