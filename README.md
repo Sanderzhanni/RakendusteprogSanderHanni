@@ -82,4 +82,4 @@ const FunctionalComponent = ({props}) =>{
 Meme
 ======
 
-![meme](./public/img/meme.png)
+![meme](./public/img/meme.jpg)
