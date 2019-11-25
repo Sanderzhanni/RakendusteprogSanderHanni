@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {imgPath} from "./header.jsx";
 import * as services from "../services";
 import {FaHeart} from "react-icons/fa";
+import {connect} from "react-redux";
 
 const ItemList = (props) => {
     return (
@@ -69,4 +70,8 @@ Item.propTypes = {
     quantity: PropTypes.number
 };
 
-export default ItemList;
+const mapStateToProps = (store) =>{
+    return {store};
+};
+
+export default connect(mapStateToProps)(ItemList);

@@ -37,6 +37,7 @@ class Cart extends React.PureComponent {
         this.state = {
             related: [],
             cartItems: [],
+            categories:  [],
             showModal: false
         };
     }
@@ -63,7 +64,6 @@ class Cart extends React.PureComponent {
     };
 
     componentDidMount() {
-        this.fetchRelated();
         this.fetchItems();
     }
 
@@ -77,10 +77,11 @@ class Cart extends React.PureComponent {
     }
 
     fetchRelated = () => {
+        this.relatedCategories();
         services.getItems()
         .then(items => {
             this.setState({
-                related: items.filter(item => this.relatedCategories().includes(item.category)).slice(0, 5)
+                related: items.filter(item => this.state.categories.includes(item.category)).slice(0, 5)
             });
         })
         .catch(err => {
@@ -89,14 +90,16 @@ class Cart extends React.PureComponent {
     };
 
     relatedCategories = () => {
-        console.log("called");
-        let categories = [];
+        let newArray = [];
         this.state.cartItems.forEach(item => {
-            if(categories.indexOf(item.category) === -1){
-                categories.push(item.category);
+            if(this.state.categories.indexOf(item.category) === -1){
+                newArray.push(item.category);
+                console.log(newArray);
             }
         });
-        return categories;
+        return this.setState({
+           categories: newArray
+        });
     };
 
 
@@ -105,6 +108,7 @@ class Cart extends React.PureComponent {
             services.getItem({itemId})
         );
         Promise.all(promises).then(items =>{
+
             this.setState({
                 cartItems: items
             });
@@ -112,6 +116,10 @@ class Cart extends React.PureComponent {
             .catch(err =>{
                 console.log(err);
             });
+    };
+
+    handleAmount = (value, _id) =>{
+        return (_id, value);
     };
 
     render() {
@@ -124,8 +132,11 @@ class Cart extends React.PureComponent {
                 </Modal>
                 <div className="shopping-cart">
                     <div className="title">Shopping Cart</div>
-                    {this.state.cartItems.map((row, index) => <ItemPurchase onRemove={this.handleRemove}
-                                                                       key={index} {...row} />)}
+                    {this.state.cartItems.filter((item, index) => this.state.cartItems.indexOf(item) === index).map((row, index) => <ItemPurchase
+                        onRemove={this.handleRemove}
+                        amount={this.handleAmount}
+                        key={index} {...row}
+                    />)}
                 </div>
                 <div className="total">
                     <div className="title">Total</div>
@@ -165,6 +176,7 @@ class Cart extends React.PureComponent {
                         <button className="total-btn" onClick={this.handleClick}>Format Transaction</button>
                     </div>
                 </div>
+                <button onClick={this.fetchRelated}>related</button>
                 <div className="related-products">
                     <div className="title">Related Products</div>
                     {this.state.related.map((item) => <RelatedItems key={item._id} {...item}/>)}
@@ -189,7 +201,7 @@ const ItemPurchase = ({_id, title, imgSrc, category, price, quantity, onRemove})
             </div>
             <div className="quantity">
                 <InputNumber defaultValue={1} min={1} max={quantity}
-                             onChange={(value) => console.log("Amount:", value, "/", quantity)}/>
+                             onChange={() => console.log(_id)}/>
             </div>
             <div className="price">${price}</div>
         </div>
@@ -215,6 +227,7 @@ ItemPurchase.propTypes = {
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
     onRemove: PropTypes.func.isRequired,
+    amount: PropTypes.func.isRequired,
 };
 
 RelatedItems.propTypes = {

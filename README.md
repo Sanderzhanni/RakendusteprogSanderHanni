@@ -34,6 +34,7 @@
 * On võimalik esitada tellimusi
 * Osutkorvis pakutakse kasutajale related tooteid :heavy_check_mark:
 * Kasutajale antakse tagasisidet kas sisselogimine ja kasutajaloomine oli edukas või mitte :heavy_check_mark:
+* Kasutaja peab valideerima om emaili peale kasutaja tegemist
 
 ## Tehniline küsimus
 
