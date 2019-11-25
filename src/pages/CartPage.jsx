@@ -1,5 +1,4 @@
 import React from "react";
-import {getItems} from "../actions/itemsActions.js";
 import PropTypes from "prop-types";
 import {MdDeleteForever} from "react-icons/md";
 import "./storepage.css";
@@ -45,6 +44,7 @@ class Cart extends React.PureComponent {
     };
 
     componentDidMount() {
+        console.log("com");
         this.fetchRelated();
         this.fetchItems();
     }
@@ -54,20 +54,33 @@ class Cart extends React.PureComponent {
         const currentId = this.props.cartItemId.join("");
         if(prevPropId !== currentId){
             this.fetchItems();
+            this.fetchRelated();
         }
     }
 
     fetchRelated = () => {
-        getItems()
-            .then(items => {
-                this.setState({
-                    related: (items.filter(item => !this.state.cartItems.includes(item))).slice(0, 5),
-                });
-            })
-            .catch(err => {
-                console.log("err", err);
+        services.getItems()
+        .then(items => {
+            this.setState({
+                related: items.filter(item => this.relatedCategories().includes(item.category)).slice(0, 5)
             });
+        })
+        .catch(err => {
+            throw new err;
+        });
     };
+
+    relatedCategories = () => {
+        console.log("called");
+        let categories = [];
+        this.state.cartItems.forEach(item => {
+            if(categories.indexOf(item.category) === -1){
+                categories.push(item.category);
+            }
+        });
+        return categories;
+    };
+
 
     fetchItems = () =>{
         const promises = this.props.cartItemId.map(itemId =>
@@ -131,7 +144,6 @@ class Cart extends React.PureComponent {
                         <button className="total-btn" onClick={this.handleClick}>Format Transaction</button>
                     </div>
                 </div>
-
                 <div className="related-products">
                     <div className="title">Related Products</div>
                     {this.state.related.map((item) => <RelatedItems key={item._id} {...item}/>)}

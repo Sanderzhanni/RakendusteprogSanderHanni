@@ -89,6 +89,8 @@ class HomePage extends React.PureComponent {
         const items = this.getVisibleItems();
         return (
             <>
+                <div className={"heroDiv"}><img src="../../static/img/hero.png" alt="HeroImage"/></div>
+                <div className={"Container"}>
                 <div className="checkbox__Container">
                     {
                         this.state.allCategories.map(categoryName => {
@@ -119,6 +121,7 @@ class HomePage extends React.PureComponent {
                     />
                 </div>
                 <ItemList items={this.getVisibleItems()}/>
+            </div>
             </>
 
         );

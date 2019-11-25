@@ -57,6 +57,11 @@ module.exports = {
                 from: "public/img",
                 to: "static/img"
             }
-        ])
+        ]),
+        new CopyPlugin([
+            {
+                from: "./public/img/favicon.ico"
+            }
+        ]),
     ]
 };

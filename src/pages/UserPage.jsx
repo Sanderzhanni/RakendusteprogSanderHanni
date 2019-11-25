@@ -5,6 +5,9 @@ import {userProptypes} from "../store/reducer";
 import {tokenUpdate, userUpdate} from "../store/actions";
 import prodectedRedirect from "../components/prodectedRedirect.jsx";
 import * as selectors from "../store/selectors";
+import "./userPage.css";
+import {AiOutlineLogout} from "react-icons/ai";
+
 
 class UserPage extends React.PureComponent {
 
@@ -21,17 +24,30 @@ class UserPage extends React.PureComponent {
     render() {
         return (
             <>
-                <div>
-                    <h1>Info</h1>
-                    <ul>
-                        <li>email: {this.props.user.email}</li>
-                        <li> created at: {this.props.user.created_at}</li>
-                    </ul>
+                <div className={"userContainer"}>
+                <h1 className={"user"}>{this.props.user.email.split(/@|. /)[0]}</h1>
+                <div className={"InfoContainer"}>
+
+                        <img src="../../static/img/profile.png" alt="prfile image" className={"profileImg"}/>
+                        <div className={"emailDiv"}>
+                            <div style={{fontWeight: "bold" }}>email</div>
+                            <div>{this.props.user.email}</div>
+                        </div>
+                    <br/>
+                        <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
+
 
                 </div>
-                <div>
-                    <button onClick={this.handleLogout}>log out</button>
                 </div>
+                <div className="navigation">
+
+                    <a className="button" href="" onClick={this.handleLogout}>
+                             <AiOutlineLogout size={28} className={"logoutIcon"}/>
+                            <span className="logout" >LOGOUT</span>
+                    </a>
+
+                </div>
+
             </>
         );
     }
