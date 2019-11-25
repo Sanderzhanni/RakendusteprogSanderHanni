@@ -28,7 +28,7 @@ class UserPage extends React.PureComponent {
                 <h1 className={"user"}>{this.props.user.email.split(/@|. /)[0]}</h1>
                 <div className={"InfoContainer"}>
 
-                        <img src="../../static/img/profile.png" alt="prfile image" className={"profileImg"}/>
+                        <img src="../../static/img/profile.png" alt="profile image" className={"profileImg"}/>
                         <div className={"emailDiv"}>
                             <div style={{fontWeight: "bold" }}>email</div>
                             <div>{this.props.user.email}</div>
