@@ -34,10 +34,24 @@ class HomePage extends React.PureComponent {
 
     componentDidMount() {
         this.props.dispatch(getItems());
-        this.state.liked.forEach(item =>{
-            document.getElementById(`${item}`).classList.toggle("heartIconToggeled");
-        });
+        this.getLiked();
     }
+
+    componentDidUpdate() {
+        this.getLiked();
+    }
+
+    getLiked = () =>{
+        this.props.liked.forEach((item) =>{
+            try {
+                document.getElementById(`${item}`).classList.add("heartIconToggeled");
+            }
+            catch(error) {
+                console.error(error);
+                // Lmao see hackjob aga toimib :PPPPPP
+            }
+        });
+    };
 
     handleSelectedFilter = (e) => {
         const category_name = e.target.name;
@@ -76,6 +90,7 @@ class HomePage extends React.PureComponent {
                     case 1:
                         return a.price - b.price;
                 }
+
             });
 
     };
