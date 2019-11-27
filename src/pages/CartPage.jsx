@@ -118,6 +118,8 @@ class Cart extends React.PureComponent {
             });
     };
 
+
+
     handleAmount = (value, _id) =>{
         return (_id, value);
     };

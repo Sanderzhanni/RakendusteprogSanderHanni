@@ -11,6 +11,11 @@ export const getCart= (store) =>{
     return store.user.cart;
 };
 
+export const getLiked = (store) =>{
+    if(!store.user) return [];
+    return store.user.liked;
+};
+
 export const getItems= (store) =>{
     return store.items;
 };

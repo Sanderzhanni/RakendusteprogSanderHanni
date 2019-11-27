@@ -15,6 +15,8 @@ class HomePage extends React.PureComponent {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         items: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        liked: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+
     };
 
     state = {checked: false};
@@ -26,11 +28,15 @@ class HomePage extends React.PureComponent {
             sortDirection: -1,
             allCategories: ["Digitaalsed klaverid", "Basskitarrid"],
             selectedCategories: ["Digitaalsed klaverid"],
+            liked: this.props.liked
         };
     }
 
     componentDidMount() {
         this.props.dispatch(getItems());
+        this.state.liked.forEach(item =>{
+            document.getElementById(`${item}`).classList.toggle("heartIconToggeled");
+        });
     }
 
     handleSelectedFilter = (e) => {
@@ -130,7 +136,8 @@ class HomePage extends React.PureComponent {
 
 const mapStateToProps = (store) => {
     return {
-        items: selectors.getItems(store)
+        items: selectors.getItems(store),
+        liked: selectors.getLiked(store)
     };
 
 };

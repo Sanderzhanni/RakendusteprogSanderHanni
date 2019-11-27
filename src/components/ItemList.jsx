@@ -5,6 +5,9 @@ import {imgPath} from "./header.jsx";
 import * as services from "../services";
 import {FaHeart} from "react-icons/fa";
 import {connect} from "react-redux";
+import {addItem, addItemToLiked, removeItemLiked} from "../store/actions";
+import * as selectors from "../store/selectors";
+
 
 const ItemList = (props) => {
     return (
@@ -18,6 +21,8 @@ const ItemList = (props) => {
                         title={item.title}
                         price={item.price}
                         quantity={1}
+                        dispatch={props.dispatch}
+                        liked={props.liked}
                     />;
                 })
             }
@@ -28,9 +33,12 @@ const ItemList = (props) => {
 
 ItemList.propTypes = {
     items: PropTypes.array,
+    dispatch: PropTypes.func.isRequired,
+    liked: PropTypes.func.isRequired,
 };
 
 const Item = (props) => {
+
     return (
 
             <div className="product">
@@ -43,16 +51,20 @@ const Item = (props) => {
                     <span className={"priceb"}>{props.price} €</span>
                     <button className={"cartText"} onClick={()=>{
                         services.getItem({itemId: props.id})
-                            .then((item) => console.log(item) );
+                            .then((item) => props.dispatch(addItem(item)) );
                     }
 
                     }>
-                        <span>Vaata <img alt={props.title} src={imgPath + "info.png"} className={"cartIcon"}/></span>
+                        <span>Lisa <img alt={props.title} src={imgPath + "cart_white.png"} className={"cartIcon"}/></span>
 
                     </button>
-                    <FaHeart id={props.id} size={24}  className={"heartIcon"} onClick={() =>
-                        console.log(document.getElementById(`${props.id}`).classList.toggle("heartIconToggeled"))}
-                    />
+
+                    <FaHeart id={props.id} size={24} className={"heartIcon"} onClick={() =>
+                    {
+                        document.getElementById(`${props.id}`).classList.toggle("heartIconToggeled");
+                        addOrRemoveItemFromLiked(props);
+                    }
+                    }/>
 
                 </div>
             </div>
@@ -61,17 +73,36 @@ const Item = (props) => {
     );
 };
 
+// const check = (props) =>{
+//     console.log(document.getElementById(`${props.id}`));
+//   if(props.liked.includes(props.id)) console.log(document.getElementById(`${props.id}`));
+// };
+
+const addOrRemoveItemFromLiked = (props) =>{
+    services.getItem({itemId: props.id})
+        .then((item) => {
+            if(!props.liked.includes(props.id)) return props.dispatch(addItemToLiked(item));
+            props.dispatch(removeItemLiked(props.id));
+        });
+    console.log(props.liked);
+};
+
 Item.propTypes = {
 
     id: PropTypes.string.isRequired,
     imgSrc: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
-    quantity: PropTypes.number
+    quantity: PropTypes.number,
+    dispatch: PropTypes.func.isRequired,
+    liked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (store) =>{
-    return {store};
+    return {
+        dispatch: PropTypes.func.isRequired,
+        liked: selectors.getLiked(store)
+    };
 };
 
 export default connect(mapStateToProps)(ItemList);

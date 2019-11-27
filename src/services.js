@@ -41,6 +41,19 @@ export const addItemToCart = ({userId, itemId, token}) =>{
         });
 };
 
+export const addItemToLiked = ({userId, itemId, token}) =>{
+    return fetch(`${basePath}/users/${userId}/liked/${itemId}`, {
+        method: "PUT",
+        headers:{
+            "Authorization": `Bearer ${token}`,
+        }
+    })
+        .then(res => {
+            if(!res.ok) throw "addItemToLiked failed";
+            return true;
+        });
+};
+
 export const removeItemFromCart = ({userId, itemId, token}) =>{
     return fetch(`${basePath}/users/${userId}/cart/${itemId}`, {
         method: "DELETE",
@@ -50,6 +63,19 @@ export const removeItemFromCart = ({userId, itemId, token}) =>{
     })
         .then(res => {
             if(!res.ok) throw "removeItemFromCart failed";
+            return true;
+        });
+};
+
+export const removeItemFromLiked = ({userId, itemId, token}) =>{
+    return fetch(`${basePath}/users/${userId}/liked/${itemId}`, {
+        method: "DELETE",
+        headers:{
+            "Authorization": `Bearer ${token}`,
+        }
+    })
+        .then(res => {
+            if(!res.ok) throw "removeItemFromLiked failed";
             return true;
         });
 };

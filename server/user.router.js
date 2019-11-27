@@ -36,6 +36,17 @@ router.put("/:userId/cart/:itemId", (req, res) => {
         res.send(200);
     });
 });
+// add item to liked
+router.put("/:userId/liked/:itemId", (req, res) => {
+    req.user.liked.push(req.item._id.toString());
+    req.user.save((err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("error saving item to liked");
+        }
+        res.send(200);
+    });
+});
 
 // remove item from cart
 router.delete("/:userId/cart/:itemId", (req, res) => {
@@ -45,6 +56,18 @@ router.delete("/:userId/cart/:itemId", (req, res) => {
         if (err) {
             console.log(err);
             return res.status(500).send("error saving item to cart");
+        }
+        res.send(200);
+    });
+});
+
+router.delete("/:userId/liked/:itemId", (req, res) => {
+    const index = req.user.liked.findIndex(itemId => itemId === req.item._id.toString());
+    req.user.liked.splice(index, 1);
+    req.user.save((err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("error deleting item from liked");
         }
         res.send(200);
     });

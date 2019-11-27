@@ -10,9 +10,12 @@ export const ITEMS_SUCCESS = "ITEMS_SUCCESS";
 export const ITEMS_FAILURE = "ITEMS_FAILURE";
 export const ITEMS_REQUEST = "ITEMS_REQUEST";
 export const ITEM_ADDED = "ITEM_ADDED";
+export const ITEM_ADDED_LIKED = "ITEM_ADDED_LIKED";
 export const ITEM_REMOVED = "ITEM_REMOVED";
+export const ITEM_REMOVED_LIKED = "ITEM_REMOVED_LIKED";
 export const USER_UPDATE = "USER_UPDATE";
 export const TOKEN_UPDATE = "TOKEN_UPDATE";
+
 
 
 export const getItems = () => (dispatch, getState) => {
@@ -61,6 +64,25 @@ export const addItem = (item) => (dispatch, getState) => {
     });
 };
 
+export const addItemToLiked = (item) => (dispatch, getState) => {
+    const store = getState();
+    const userId = selectors.getUser(store)._id;
+    const itemId = item._id;
+    const token = selectors.getToken(store);
+    services.addItemToLiked({userId, itemId, token})
+        .then(() => {
+            toast.success("toode lisatud lemmikutesse", {hideProgressBar: true, position: "bottom-right"});
+            dispatch({
+                type: ITEM_ADDED_LIKED,
+                payload: itemId
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Toode lisamisel tekkis viga!");
+        });
+};
+
 export const removeItem = (itemId) => (dispatch, getState) =>{
     const store = getState();
     const userId = selectors.getUser(store)._id;
@@ -70,6 +92,24 @@ export const removeItem = (itemId) => (dispatch, getState) =>{
             toast.success("toode eemaldatud", {hideProgressBar: true, position: "bottom-right"});
             dispatch({
                 type: ITEM_REMOVED,
+                payload: itemId
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Toode eemaldamisel tekkis viga!");
+        });
+};
+
+export const removeItemLiked = (itemId) => (dispatch, getState) =>{
+    const store = getState();
+    const userId = selectors.getUser(store)._id;
+    const token = selectors.getToken(store);
+    services.removeItemFromLiked({userId, itemId, token})
+        .then(() => {
+            toast.success("toode eemaldatud lemmikutest", {hideProgressBar: true, position: "bottom-right"});
+            dispatch({
+                type: ITEM_REMOVED_LIKED,
                 payload: itemId
             });
         })

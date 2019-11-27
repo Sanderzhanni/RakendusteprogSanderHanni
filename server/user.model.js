@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     hash: {type: String, required: true},
     created_at: {type: Date, default: Date.now},
     cart: {type: [String], default: []},
+    liked: {type: [String], default: []},
 });
 
 
@@ -27,7 +28,8 @@ userSchema.statics.login = function ({
                     _id: userDoc._id,
                     email: userDoc.email,
                     created_at: userDoc.created_at,
-                    cart: userDoc.cart
+                    cart: userDoc.cart,
+                    liked: userDoc.liked
                 });
             });
         });
