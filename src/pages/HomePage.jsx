@@ -47,7 +47,7 @@ class HomePage extends React.PureComponent {
                 document.getElementById(`${item}`).classList.add("heartIconToggeled");
             }
             catch(error) {
-                console.error(error);
+
                 // Lmao see hackjob aga toimib :PPPPPP
             }
         });
