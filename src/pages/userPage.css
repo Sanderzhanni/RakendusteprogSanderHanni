@@ -1,4 +1,9 @@
-.userContainer{
+@import url(https://fonts.googleapis.com/css?family=Oswald:400);
+
+.user-carousel-container{
+    display: flex;
+}
+.user-container{
     text-align: center;
     background-color: #fff;
     display: block;
@@ -8,23 +13,24 @@
     -webkit-box-shadow: 0px 1px 21px 5px rgba(0,0,0,0.55);
     box-shadow: 0px 1px 21px 5px rgba(0,0,0,0.55);
 }
+.carousel-container{
+    padding:0 60px;
+    max-width: 800px;
+    margin: 0 auto;
+}
 .user{
     border-bottom: 1px solid gray;
 }
-.InfoContainer{
+.info-container{
     font-size: 24px;
-
-
 }
-
-.profileImg{
+.profile-img{
     height: 200px;
     width: 200px;
     border: 1px solid gray;
     padding: 15px;
 }
-
-.emailDiv{
+.email-div{
     border: 1px solid gray;
     margin: 0 auto;
     margin-top: 15px;
@@ -32,14 +38,11 @@
     padding: 15px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Oswald:400);
-
-.navigation {
+.navigation-container {
     width: 100%;
     background-color: black;
 }
-
-.logout {
+.logout-span {
     font-size: .8em;
     font-family: 'Oswald', sans-serif;
     position: relative;
@@ -52,12 +55,10 @@
     -webkit-transition: opacity .35s;
 
 }
-
 .logoutIcon{
     vertical-align: middle;
 }
-
-.button {
+.logout-button {
     text-decoration: none;
     float: left;
     padding: 10px;
@@ -69,16 +70,13 @@
     -webkit-transition: width .35s;
     overflow: hidden;
     height: 30px;
+    cursor: pointer;
 }
-
-.button:hover {
+.logout-button:hover {
     width: 200px;
 }
-
-.button:hover .logout{
+.logout-button:hover .logout-span{
     opacity: .9;
 }
 
-.button {
-    text-decoration: none;
-}
+

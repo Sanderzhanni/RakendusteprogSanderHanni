@@ -11,7 +11,10 @@ export const imgPath = "/static/img/";
 const ProfileIcon = () => {
     return (
         <Link to={"/login"}>
-            <button className="loginButton" id="loginButton"><img src={imgPath + "user.png"} className="carticon"/>Login/Signup
+            <button className="login-button" id="loginButton">
+                <img src={imgPath + "user.png"} className="carticon"/>
+                <span>Login/Signup</span>
+
             </button>
         </Link>
     );
@@ -20,8 +23,10 @@ const ProfileIcon = () => {
 const WelcomeIcon = ({user}) => {
     return (
         <Link to={"/users/" + user._id}>
-            <button className="loginButton" id="loginButton"><img src={imgPath + "user.png"}
-                                                                  className="carticon"/>Welcome, {user.email}</button>
+            <button className="user-button" id="loginButton">
+                <img src={imgPath + "user.png"} className="carticon"/>
+                <span>Welcome, {user.email}</span>
+            </button>
         </Link>
     );
 };

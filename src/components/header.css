@@ -68,6 +68,7 @@
     }
 
     .loginButton {
+        width: 100%;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
     }
@@ -116,10 +117,7 @@
         text-decoration: none;
     }
 
-    .headerButtons {
-        height: 40px;
-        display: flex;
-    }
+
 
     .headerButtons button {
         background-color: #6F6F6F;
@@ -130,7 +128,7 @@
         padding-right: 15px;
     }
 
-    .headerButtons button:hover {
+    .headerButtons button:hover{
         background-color: #8B8B8B;
         transition-duration: 0.2s;
         transform: scale(1.02);
@@ -144,9 +142,9 @@
         vertical-align: middle;
     }
 
-    .cart, .loginButton {
+    .cart, .user-button, .logout-button {
         font-size: 16px;
-        height: 40px;
+        padding: 10px 0 10px 0;
     }
 
     .cart {
@@ -154,8 +152,27 @@
         border-top-right-radius: 5px;
     }
 
-    .loginButton {
+    .user-button {
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
+    }
+
+    .logout-button {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        width: 100%;
+    }
+
+    .user-settings-button{
+        padding: 0 !important;
+        margin-left: 10px;
+    }
+
+    .user-settings-button:hover{
+        background-color: #8B8B8B !important;
+    }
+
+    .settings-icon{
+        vertical-align: middle;
     }
 }

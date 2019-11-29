@@ -10,6 +10,7 @@ import {AiOutlineLogout} from "react-icons/ai";
 import {ItemProps} from "./CartPage.jsx";
 import * as services from "../services";
 import ItemsCarousel from "react-items-carousel";
+import {Link} from "react-router-dom";
 
 
 
@@ -26,11 +27,8 @@ class UserPage extends React.PureComponent {
         this.state = {
             liked: [],
             activeItemIndex: 0,
-            setActiveItemIndex: 0
         };
     }
-
-
 
     componentDidMount() {
         this.fetchItems();
@@ -60,72 +58,54 @@ class UserPage extends React.PureComponent {
         const chevronWidth = 60;
         return (
             <>
-                <div className={"userContainer"}>
-                    <h1 className={"user"}>{this.props.user.email.split(/@|. /)[0]}</h1>
-                    <div className={"InfoContainer"}>
-
-                        <img src="../../static/img/profile.png" alt="profile image" className={"profileImg"}/>
-                        <div className={"emailDiv"}>
-                            <div style={{fontWeight: "bold"}}>email</div>
-                            <div>{this.props.user.email}</div>
+                <div className={"user-carousel-container"}>
+                    <div className={"user-container"}>
+                        <h1 className={"user"}>{this.props.user.email.split(/@|. /)[0]}</h1>
+                        <div className={"info-container"}>
+                            <img src="../../static/img/profile.png" alt="profile image" className={"profile-img"}/>
+                            <div className={"email-div"}>
+                                <div style={{fontWeight: "bold"}}>email</div>
+                                <div>{this.props.user.email}</div>
+                            </div>
+                            <br/>
+                            <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
                         </div>
-                        <br/>
-                        <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
+                    </div>
 
-
+                    <div className={"carousel-container"}>
+                        <ItemsCarousel
+                            placeholderItem={<div style={{ height: 200, background: "#EEE" }} />}
+                            enablePlaceholder={true}
+                            requestToChangeActive={value => this.setState({activeItemIndex: value})}
+                            activeItemIndex={this.state.activeItemIndex}
+                            numberOfCards={3}
+                            gutter={20}
+                            leftChevron={<button>{"<"}</button>}
+                            rightChevron={<button>{">"}</button>}
+                            outsideChevron
+                            chevronWidth={chevronWidth}
+                        >
+                            {this.state.liked.map((item) =>
+                                <div key={item._id}>
+                                    <Link to={"/items/" + item._id + ""}>
+                                    <div>{item.title}</div>
+                                    <img src={item.imgSrc} alt={item._id}/>
+                                    </Link>
+                                </div>
+                            )}
+                        </ItemsCarousel>
                     </div>
                 </div>
-                <div className="navigation">
-                    <a className="button" onClick={this.handleLogout}>
+                <div className="navigation-container">
+                    <a className="logout-button" onClick={this.handleLogout}>
                         <AiOutlineLogout size={28} className={"logoutIcon"}/>
-                        <span className="logout">LOGOUT</span>
+                        <span className="logout-span">LOGOUT</span>
                     </a>
                 </div>
-
-                <div style={{"padding":"0 60px","maxWidth":800,"margin":"0 auto"}}>
-                    <ItemsCarousel
-                        requestToChangeActive={value => this.setState({activeItemIndex: value})}
-                        activeItemIndex={this.state.activeItemIndex}
-                        numberOfCards={3}
-                        gutter={20}
-                        leftChevron={<button>{"<"}</button>}
-                        rightChevron={<button>{">"}</button>}
-                        outsideChevron
-                        chevronWidth={chevronWidth}
-                    >
-                        {this.state.liked.map((item) =>
-                            <div key={item._id}>
-                                <img src={item.imgSrc} alt={item._id}/>
-                            </div>
-                        )}
-                    </ItemsCarousel>
-                </div>
-
-
             </>
         );
     }
 }
-
-const LikedItems = ({_id, title, imgSrc, category, price}) =>{
-    return(
-      <>
-          <div>{_id}</div>
-          <div>{title}</div>
-          <img src={imgSrc} alt="_id"/>
-          <div>{category}</div>
-          <div>{price}</div>
-      </>
-    );
-};
-
-LikedItems.propTypes = {
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-};
 
 const mapStateToProps = (store) => {
     return {
