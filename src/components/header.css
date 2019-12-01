@@ -78,7 +78,8 @@
 
     .item-count {
         position: absolute;
-        margin-left: -12px;
+        margin-left: -15px;
+        margin-top: 25px;
         border: solid brown 2px;
         padding: 2px;
         height: 20px;
@@ -87,6 +88,10 @@
         border-radius: 100px;
         background-color: crimson;
         color: white;
+    }
+
+    .headerButtons{
+        display: flex;
     }
 
     .header {
@@ -160,7 +165,6 @@
     .logout-button {
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
-        width: 100%;
     }
 
     .user-settings-button{

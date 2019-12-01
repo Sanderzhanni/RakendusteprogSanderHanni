@@ -9,18 +9,8 @@ import {connect} from "react-redux";
 import {removeItem} from "../store/actions.js";
 import * as selectors from "../store/selectors";
 import * as services from "../services";
-import Modal from "react-modal";
-
-const customStyles = {
-    content : {
-        top                   : "50%",
-        left                  : "50%",
-        right                 : "auto",
-        bottom                : "auto",
-        marginRight           : "-50%",
-        transform             : "translate(-50%, -50%)"
-    }
-};
+import Modal from "../components/Modal.jsx";
+import Stripe from "../components/Stripe.jsx";
 
 class Cart extends React.PureComponent {
 
@@ -33,12 +23,11 @@ class Cart extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
         this.state = {
             related: [],
             cartItems: [],
             categories:  [],
-            showModal: false
+            isModalOpen: false,
         };
     }
 
@@ -51,13 +40,13 @@ class Cart extends React.PureComponent {
         };
     };
 
-    handleClick = () => {
-        this.setState({ showModal: true });
+    handleModal = () =>{
+        this.setState({
+           isModalOpen: !this.state.isModalOpen
+        });
     };
 
-    handleCloseModal= () => {
-        this.setState({ showModal: false });
-    };
+
 
     handleRemove = (_id) => {
         this.props.dispatch(removeItem(_id));
@@ -126,9 +115,8 @@ class Cart extends React.PureComponent {
         const {tax, withoutTax} = this.calcSum();
         return (
             <>
-                <Modal isOpen={this.state.showModal} style={customStyles}>
-                    <div>Hello world</div>
-                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                <Modal open={this.state.isModalOpen} onClose={this.handleModal}>
+                    <Stripe sum={tax + withoutTax}/>
                 </Modal>
                 <div className="shopping-cart">
                     <div className="title">Shopping Cart</div>
@@ -173,7 +161,7 @@ class Cart extends React.PureComponent {
                         </tbody>
                     </table>
                     <div className="total-btn-div">
-                        <button className="total-btn" onClick={this.handleClick}>Format Transaction</button>
+                        <button className="total-btn" onClick={this.handleModal}>Format Transaction</button>
                     </div>
                 </div>
                 <button onClick={this.fetchRelated}>related</button>
