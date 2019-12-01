@@ -9,6 +9,24 @@ const itemSchema = new mongoose.Schema({
     created_at: {type: Date, default: Date.now},
 });
 
+itemSchema.statics.getItems = function(itemIds){
+    return new Promise((resolve, reject) =>{
+        const query = itemIds.map(id => mongoose.Types.ObjectId(id));
+        this.find({
+            "_id": {
+                $in: query
+            }
+        }, (err, docs) => {
+            if(err){
+                console.error(err);
+                return reject("Failed to get items");
+            }
+            resolve(docs);
+        });
+    });
+
+};
+
 const Item = mongoose.model("item", itemSchema);
 
 module.exports = Item;
