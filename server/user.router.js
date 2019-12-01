@@ -61,6 +61,7 @@ router.delete("/:userId/cart/:itemId", (req, res) => {
     });
 });
 
+// remove item from liked
 router.delete("/:userId/liked/:itemId", (req, res) => {
     const index = req.user.liked.findIndex(itemId => itemId === req.item._id.toString());
     req.user.liked.splice(index, 1);
@@ -90,6 +91,13 @@ router.delete("/", (req, res) => {
         console.log("success delete many users", docs);
         res.send(204);
     });
+});
+
+// send card token to backend
+router.post("/:userId/checkout", authMiddleware, (req, res) =>{
+    console.log(req.body);
+
+   res.send(200);
 });
 
 

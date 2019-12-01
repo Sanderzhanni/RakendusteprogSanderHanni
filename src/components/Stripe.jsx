@@ -3,11 +3,14 @@ import {StripeProvider, Elements, CardElement}  from "react-stripe-elements";
 import "./stripe.css";
 import {injectStripe} from "react-stripe-elements";
 import PropTypes from "prop-types";
+import * as services from "../services";
+import {connect} from "react-redux";
+import * as selectors from "../store/selectors";
 
 class Stripe extends React.PureComponent{
 
     static propTypes = {
-        sum: PropTypes.number.isRequired,
+        sum: PropTypes.func.isRequired,
     };
 
     render(){
@@ -30,12 +33,23 @@ class StripeForm extends React.PureComponent{
     static propTypes = {
         stripe: PropTypes.object.isRequired,
         sum: PropTypes.number.isRequired,
+        userId: PropTypes.string.isRequired,
+        token: PropTypes.string.isRequired,
     };
 
     handleSubmit = (e) =>{
         e.preventDefault();
         this.props.stripe.createToken()
-            .then( result => console.log(result));
+            .then( ({error, token}) => {
+                if(error){
+                  console.log("token error", error);
+                  return;
+                }
+                services.checkout({ stripeToken:token, userId: this.props.userId, token: this.props.token})
+                    .then(x => console.log(x))
+                    .catch(err => console.error(err));
+            });
+
     };
 
     render(){
@@ -52,4 +66,11 @@ class StripeForm extends React.PureComponent{
     }
 }
 
-const InjectedStripeForm = injectStripe(StripeForm);
+const mapStateToProps = (store) =>{
+    return{
+        userId: selectors.getUserId(store),
+        token: selectors.getToken(store)
+    };
+};
+
+const InjectedStripeForm = connect(mapStateToProps)(injectStripe(StripeForm));
