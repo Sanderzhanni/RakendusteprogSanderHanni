@@ -64,7 +64,7 @@ class UserPage extends React.PureComponent {
     };
 
     render() {
-        let chevronWidth = 30;
+        let chevronWidth = 60;
         return (
             <>
                 <div className={"user-carousel-container"}>
@@ -80,28 +80,47 @@ class UserPage extends React.PureComponent {
                             <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
                         </div>
                     </div>
-
-                    <div className={"carousel-container"}>
-                        <ItemsCarousel
-                            requestToChangeActive={value => this.setState({activeItemIndex: value})}
-                            activeItemIndex={this.state.activeItemIndex}
-                            numberOfCards={2}
-                            gutter={5}
-                            leftChevron={<button>{"<"}</button>}
-                            rightChevron={<button>{">"}</button>}
-                            outsideChevron
-                            chevronWidth={chevronWidth}
-                        >
-                            {this.state.liked.map((item) =>
-                                <div key={item._id}>
+                    {this.state.liked.length < 3 &&
+                        <div>
+                            {this.state.liked.map((item, index) =>
+                                <div key={index}>
                                     <Link to={"/items/" + item._id + ""}>
-                                    <div>{item.title}</div>
-                                    <img src={item.imgSrc} alt={item._id}/>
+                                        <div>{item.title}</div>
+                                        <img src={item.imgSrc} alt={item._id}/>
                                     </Link>
                                 </div>
                             )}
-                        </ItemsCarousel>
-                    </div>
+                        </div>
+                    }
+                    {this.state.liked.length > 2 &&
+                        <div>
+                            <div className={"carousel-container"}>
+                                <ItemsCarousel
+                                    requestToChangeActive={value => this.setState({activeItemIndex: value})}
+                                    activeItemIndex={this.state.activeItemIndex}
+                                    numberOfCards={3}
+                                    gutter={5}
+                                    leftChevron={<button>{"<"}</button>}
+                                    rightChevron={<button>{">"}</button>}
+
+                                    outsideChevron
+                                    chevronWidth={chevronWidth}
+
+                                >
+                                    {this.state.liked.map((item, index) =>
+                                        <div key={index}>
+                                            <Link to={"/items/" + item._id + ""}>
+                                                <div>{item.title}</div>
+                                                <img src={item.imgSrc} alt={item._id}/>
+                                            </Link>
+                                        </div>
+                                    )}
+                                </ItemsCarousel>
+                            </div>
+                        </div>
+                    }
+
+
                 </div>
 
 
