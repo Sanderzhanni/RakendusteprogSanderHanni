@@ -96,6 +96,17 @@ router.delete("/", (req, res) => {
 // send card token to backend
 router.post("/:userId/checkout", authMiddleware, async (req, res) =>{
     const {error, amount} = await req.user.getCartAmount();
+    if(error) return res.send(500);
+    req.user.createPayment(amount)
+        .then(() => {
+            return req.user.emptyCart();
+        })
+        .then(() => {
+            res.send(200);
+        })
+        .catch(() =>{
+            res.send(500);
+        });
     console.log({error, amount});
 
    res.send(200);

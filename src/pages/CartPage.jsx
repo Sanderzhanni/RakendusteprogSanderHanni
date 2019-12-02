@@ -46,7 +46,9 @@ class Cart extends React.PureComponent {
         });
     };
 
-
+    handleSubmit = () =>{
+        this.handleModal();
+    };
 
     handleRemove = (_id) => {
         this.props.dispatch(removeItem(_id));
@@ -116,59 +118,72 @@ class Cart extends React.PureComponent {
         return (
             <>
                 <Modal open={this.state.isModalOpen} onClose={this.handleModal}>
-                    <Stripe sum={tax + withoutTax}/>
+                    <Stripe sum={tax + withoutTax} onSubmit={this.handleSubmit}/>
                 </Modal>
-                <div className="shopping-cart">
-                    <div className="title">Shopping Cart</div>
-                    {this.state.cartItems.filter((item, index) => this.state.cartItems.indexOf(item) === index).map((row, index) => <ItemPurchase
-                        onRemove={this.handleRemove}
-                        amount={this.handleAmount}
-                        key={index} {...row}
-                    />)}
-                </div>
-                <div className="total">
-                    <div className="title">Total</div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="total-text">Tax:</div>
-                            </td>
-                            <td>
-                                <div className="total-price">${tax}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="total-text">Without Tax:</div>
-                            </td>
-                            <td>
-                                <div className="total-price">${withoutTax}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="total-text">Total:</div>
-                            </td>
-                            <td>
-                                <div className="total-price">${tax + withoutTax}</div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div className="total-btn-div">
-                        <button className="total-btn" onClick={this.handleModal}>Format Transaction</button>
+                {!this.state.cartItems.length > 0 &&
+                    <div>
+                        <div className="shopping-cart">
+                            <div className="title">Cart is empty</div>
+                        </div>
                     </div>
-                </div>
-                <button onClick={this.fetchRelated}>related</button>
-                <div className="related-products">
-                    <div className="title">Related Products</div>
-                    {this.state.related.map((item) => <RelatedItems key={item._id} {...item}/>)}
-                </div>
+                }
+                {this.state.cartItems.length > 0 &&
+                    <div>
+                        <div className="shopping-cart">
+                            <div className="title">Shopping Cart</div>
+
+                            {this.state.cartItems.filter((item, index) => this.state.cartItems.indexOf(item) === index).map((row, index) => <ItemPurchase
+                                onRemove={this.handleRemove}
+                                amount={this.handleAmount}
+                                key={index} {...row}
+                            />)}
+                        </div>
+                        <div className="total">
+                            <div className="title">Total</div>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div className="total-text">Tax:</div>
+                                    </td>
+                                    <td>
+                                        <div className="total-price">${tax}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div className="total-text">Without Tax:</div>
+                                    </td>
+                                    <td>
+                                        <div className="total-price">${withoutTax}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div className="total-text">Total:</div>
+                                    </td>
+                                    <td>
+                                        <div className="total-price">${tax + withoutTax}</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div className="total-btn-div">
+                                <button className="total-btn" onClick={this.handleModal}>Format Transaction</button>
+                            </div>
+                        </div>
+                        <button onClick={this.fetchRelated}>related</button>
+                        <div className="related-products">
+                            <div className="title">Related Products</div>
+                            {this.state.related.map((item) => <RelatedItems key={item._id} {...item}/>)}
+                        </div>
+                    </div>
+                }
+
             </>
 
         );

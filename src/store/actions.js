@@ -17,6 +17,18 @@ export const USER_UPDATE = "USER_UPDATE";
 export const TOKEN_UPDATE = "TOKEN_UPDATE";
 
 
+export const refreshUser = () => (dispatch, getState) =>{
+    const store = getState();
+    const userId = selectors.getUser(store)._id;
+    const token = selectors.getToken(store);
+    services.getUser({userId, token})
+        .then( user => {
+            dispatch(userUpdate(user));
+        })
+        .catch(err => {
+            console.log("error", err);
+        });
+};
 
 export const getItems = () => (dispatch, getState) => {
     const store = getState();

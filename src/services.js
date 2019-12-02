@@ -109,7 +109,6 @@ export const signup = ({password, email}) =>{
 };
 
 export const checkout = ({stripeToken, userId, token}) =>{
-    console.log(userId);
     return fetch(`${basePath}/users/${userId}/checkout`, {
         method: "POST",
         headers:{
