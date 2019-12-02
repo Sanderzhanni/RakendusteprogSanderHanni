@@ -3,6 +3,11 @@ const router = express.Router();
 const User = require("./user.model.js");
 const Item = require("./item.model.js");
 const {authMiddleware} = require("./middlewares");
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+const Payment = require("./payments.model");
+
+
 
 router.param("userId", (req, res, next, userId) => {
     User.findById(userId, (err, user) => {
@@ -102,14 +107,33 @@ router.post("/:userId/checkout", authMiddleware, async (req, res) =>{
             return req.user.emptyCart();
         })
         .then(() => {
-            res.send(200);
+            return stripe.charges.create({
+                amount: amount *100,
+                currency: "eur",
+                source: req.body.id,
+            });
         })
-        .catch(() =>{
-            res.send(500);
+        .then((stripeResponse) =>{
+            console.log(stripeResponse);
+        })
+        .catch((err) =>{
+            console.log("error", err);
         });
     console.log({error, amount});
 
-   res.send(200);
+   res.sendStatus(200);
+});
+
+//get payments
+router.get("/:userId/payments", authMiddleware, (req, res) =>{
+    Payment.getUserPayments(req.user._id)
+        .then((docs) =>{
+            return res.send(docs);
+        })
+        .catch((err) =>{
+          console.log(err);
+          res.sendStatus(500);
+        });
 });
 
 

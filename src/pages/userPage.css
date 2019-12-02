@@ -2,6 +2,7 @@
 
 .user-carousel-container{
     display: flex;
+    position: relative;
 }
 .user-container{
     text-align: center;
@@ -77,6 +78,10 @@
 }
 .logout-button:hover .logout-span{
     opacity: .9;
+}
+
+.payments-container{
+    display: block;
 }
 
 

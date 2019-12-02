@@ -7,6 +7,12 @@ const paymentsSchema = new mongoose.Schema({
     created_at: {type: Date, default: Date.now},
 });
 
+paymentsSchema.statics.getUserPayments = function(userId){
+    return this.find({
+       "userId": userId
+    });
+};
+
 const Payment = mongoose.model("Payment", paymentsSchema);
 
 module.exports = Payment;

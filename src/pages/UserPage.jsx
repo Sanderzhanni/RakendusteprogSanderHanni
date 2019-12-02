@@ -13,13 +13,14 @@ import ItemsCarousel from "react-items-carousel";
 import {Link} from "react-router-dom";
 
 
-
 class UserPage extends React.PureComponent {
 
     static propTypes = {
         user: PropTypes.shape(userProptypes),
         dispatch: PropTypes.func.isRequired,
         likedId: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        token: PropTypes.string.isRequired,
+        userId: PropTypes.string.isRequired,
     };
 
     constructor(props) {
@@ -27,10 +28,18 @@ class UserPage extends React.PureComponent {
         this.state = {
             liked: [],
             activeItemIndex: 0,
+            payments: []
         };
     }
 
     componentDidMount() {
+        const {userId, token} = this.props;
+        services.getPayments({userId, token})
+            .then(docs => {
+               this.setState({
+                   payments: docs
+               });
+            });
         this.fetchItems();
     }
 
@@ -55,7 +64,7 @@ class UserPage extends React.PureComponent {
     };
 
     render() {
-        const chevronWidth = 60;
+        let chevronWidth = 30;
         return (
             <>
                 <div className={"user-carousel-container"}>
@@ -74,12 +83,10 @@ class UserPage extends React.PureComponent {
 
                     <div className={"carousel-container"}>
                         <ItemsCarousel
-                            placeholderItem={<div style={{ height: 200, background: "#EEE" }} />}
-                            enablePlaceholder={true}
                             requestToChangeActive={value => this.setState({activeItemIndex: value})}
                             activeItemIndex={this.state.activeItemIndex}
-                            numberOfCards={3}
-                            gutter={20}
+                            numberOfCards={2}
+                            gutter={5}
                             leftChevron={<button>{"<"}</button>}
                             rightChevron={<button>{">"}</button>}
                             outsideChevron
@@ -96,6 +103,25 @@ class UserPage extends React.PureComponent {
                         </ItemsCarousel>
                     </div>
                 </div>
+
+
+                <div className={"payments-container"}>
+                    <div>
+                        {this.state.payments.map(payment => {
+                            return (
+                                <div key={payment._id}>
+                                    <div>{payment.userId}</div>
+                                    <div>{payment.cart.length}</div>
+                                    <div>{payment.amount}</div>
+                                    <div>{payment.created_at}</div>
+                                    <div>======================</div>
+                                </div>
+                            );
+                        })
+                        }
+                    </div>
+                </div>
+
                 <div className="navigation-container">
                     <a className="logout-button" onClick={this.handleLogout}>
                         <AiOutlineLogout size={28} className={"logoutIcon"}/>
@@ -110,7 +136,9 @@ class UserPage extends React.PureComponent {
 const mapStateToProps = (store) => {
     return {
         user: selectors.getUser(store),
-        likedId: selectors.getLiked(store)
+        likedId: selectors.getLiked(store),
+        token: selectors.getToken(store),
+        userId: selectors.getUserId(store)
     };
 };
 

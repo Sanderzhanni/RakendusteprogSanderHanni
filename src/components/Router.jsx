@@ -11,15 +11,20 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import * as actions from "../store/actions";
+import * as selectors from "../store/selectors";
 
 class Router extends React.PureComponent{
 
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
+        userId: PropTypes.string.isRequired,
     };
 
     componentDidMount() {
-        this.props.dispatch(actions.refreshUser());
+        const user = this.props.userId;
+        if(user){
+            this.props.dispatch(actions.refreshUser());
+        }
     }
 
 
@@ -44,6 +49,11 @@ class Router extends React.PureComponent{
 
 }
 
+const mapStateToProps = (store) => {
+    return {
+        userId: selectors.getUserId(store)
+    };
 
+};
 
-export default connect()(Router);
+export default connect(mapStateToProps)(Router);

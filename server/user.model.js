@@ -74,7 +74,7 @@ userSchema.methods.createPayment = function(amount){
                 console.log(err);
                 return reject("Error saving payment");
             }
-            return resolve("Success");
+            resolve("Success");
         });
     });
 };
