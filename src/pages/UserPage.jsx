@@ -28,18 +28,10 @@ class UserPage extends React.PureComponent {
         this.state = {
             liked: [],
             activeItemIndex: 0,
-            payments: []
         };
     }
 
     componentDidMount() {
-        const {userId, token} = this.props;
-        services.getPayments({userId, token})
-            .then(docs => {
-               this.setState({
-                   payments: docs
-               });
-            });
         this.fetchItems();
     }
 
@@ -78,6 +70,10 @@ class UserPage extends React.PureComponent {
                             </div>
                             <br/>
                             <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
+                            <Link to={"/users/" + this.props.userId + "/payments"}>
+                                <button>Payments</button>
+                            </Link>
+
                         </div>
                     </div>
                     {this.state.liked.length < 3 &&
@@ -123,30 +119,13 @@ class UserPage extends React.PureComponent {
 
                 </div>
 
-
-                <div className={"payments-container"}>
-                    <div>
-                        {this.state.payments.map(payment => {
-                            return (
-                                <div key={payment._id}>
-                                    <div>{payment.userId}</div>
-                                    <div>{payment.cart.length}</div>
-                                    <div>{payment.amount}</div>
-                                    <div>{payment.created_at}</div>
-                                    <div>======================</div>
-                                </div>
-                            );
-                        })
-                        }
-                    </div>
-                </div>
-
                 <div className="navigation-container">
                     <a className="logout-button" onClick={this.handleLogout}>
                         <AiOutlineLogout size={28} className={"logoutIcon"}/>
                         <span className="logout-span">LOGOUT</span>
                     </a>
                 </div>
+
             </>
         );
     }

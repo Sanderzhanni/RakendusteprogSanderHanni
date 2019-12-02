@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage.jsx";
 import SignupPage from "../pages/SignupPage.jsx";
 import StorePage from "../pages/CartPage.jsx";
 import UserPage from "../pages/UserPage.jsx";
+import UserPayments from "../pages/UserPayments.jsx";
 import ItemPage from "../pages/ItemPage.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import React from "react";
@@ -39,6 +40,7 @@ class Router extends React.PureComponent{
                         <Route path="/signup" exact component={SignupPage}/>
                         <Route path={"/cart"} component={StorePage}/>
                         <Route path="/users/:userId" exact component={UserPage}/>
+                        <Route path="/users/:userId/payments" exact component={UserPayments}/>
                         <Route path="/items/:itemId" exact component={ItemPage}/>
                         <Route component={NotFound}/>
                     </Switch>
