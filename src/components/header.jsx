@@ -11,7 +11,7 @@ export const imgPath = "/static/img/";
 const ProfileIcon = () => {
     return (
         <Link to={"/login"}>
-            <button className="login-button" id="loginButton">
+            <button className="user-button" id="loginButton">
                 <img src={imgPath + "user.png"} className="carticon"/>
                 <span>Login/Signup</span>
 
