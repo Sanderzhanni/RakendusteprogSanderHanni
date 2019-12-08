@@ -78,7 +78,8 @@ const Item = (props) => {
 //   if(props.liked.includes(props.id)) console.log(document.getElementById(`${props.id}`));
 // };
 
-const addOrRemoveItemFromLiked = (props) =>{
+export const addOrRemoveItemFromLiked = (props) =>{
+    console.log(props.id);
     services.getItem({itemId: props.id})
         .then((item) => {
             if(!props.liked.includes(props.id)) return props.dispatch(addItemToLiked(item));

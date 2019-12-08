@@ -62,6 +62,10 @@ export const addItem = (item) => (dispatch, getState) => {
     const userId = selectors.getUser(store)._id;
     const itemId = item._id;
     const token = selectors.getToken(store);
+    const cart = selectors.getCart(store);
+    if(cart.includes(itemId)){
+        return  toast.warning("toode on juba korvis olemas", {hideProgressBar: true, position: "bottom-right"});
+    }
     services.addItemToCart({userId, itemId, token})
     .then(() => {
         toast.success("toode lisatud", {hideProgressBar: true, position: "bottom-right"});

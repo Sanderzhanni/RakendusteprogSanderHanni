@@ -5,6 +5,9 @@ import {addItem} from "../store/actions.js";
 import {toast} from "react-toastify";
 import "../components/itempage.css";
 import * as services from "../services";
+import {FaHeart} from "react-icons/fa";
+import {addOrRemoveItemFromLiked} from "../components/ItemList.jsx";
+import * as selectors from "../store/selectors";
 
 
 class ItemPage extends React.PureComponent {
@@ -12,6 +15,7 @@ class ItemPage extends React.PureComponent {
     static propTypes = {
         history: PropTypes.object.isRequired,
         dispatch: PropTypes.func.isRequired,
+        liked: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -22,7 +26,6 @@ class ItemPage extends React.PureComponent {
 
     componentDidMount() {
         this.fetchItem();
-
         toast.configure({
             autoClose: 100,
             draggable: false,
@@ -30,12 +33,30 @@ class ItemPage extends React.PureComponent {
         });
     }
 
+    componentDidUpdate() {
+        this.getLiked();
+    }
+
+    getLiked = () =>{
+        this.props.liked.forEach((item) =>{
+            try {
+                console.log(document.getElementById(`${item}`));
+                document.getElementById(`${item}`).classList.add("heartIconToggeled");
+            }
+            catch(error) {
+
+                // Lmao see hackjob aga toimib :PPPPPP
+            }
+        });
+    };
+
     fetchItem = () => {
         services.getItem({itemId: this.props.match.params.itemId})
         .then(item => {
 
             this.setState({
-                ...item
+                ...item,
+                liked: this.props.liked
             });
         })
         .catch(err => {
@@ -50,27 +71,25 @@ class ItemPage extends React.PureComponent {
     render() {
         return (
             <>
-                <div className="content">
+                <div className="Container">
                     <div className="product-item">
                         <div>
-                            <div className="title-item">{this.state.title}
-                                <hr/>
                             </div>
                             <div className="container-item">
+                                <div className="title-item">{this.state.title}</div>
+                                <div className="product-id">Tootekood: {this.state._id}</div>
                                 <img className="image-item" src={this.state.imgSrc}/>
-                                <div className="description-item">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </div>
                                 <div className="price-item">${this.state.price}</div>
                                 <button className="btn-item" onClick={this.handleBuy}>Lisa korvi</button>
+                                <FaHeart id={this.state._id} size={35} className={"heart-item"} onClick={() =>
+                                {
+                                    document.getElementById(`${this.state._id}`).classList.toggle("heartIconToggeled");
+                                    addOrRemoveItemFromLiked({liked: this.state.liked, id:this.state._id, dispatch:this.props.dispatch});
+                                }
+                                }/>
                             </div>
                         </div>
                     </div>
-                </div>
             </>
         );
     }
@@ -81,4 +100,11 @@ ItemPage.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-export default connect()(ItemPage);
+const mapStateToProps = (store) =>{
+    return {
+        dispatch: PropTypes.func.isRequired,
+        liked: selectors.getLiked(store)
+    };
+};
+
+export default connect(mapStateToProps)(ItemPage);

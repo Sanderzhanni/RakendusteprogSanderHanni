@@ -1,48 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald:400);
 
-.user-carousel-container{
-    display: flex;
-    position: relative;
-}
-.user-container{
-    text-align: center;
-    background-color: #fff;
-    display: block;
-    width: 400px;
-    margin: 20px;
-    padding: 5px;
-    -webkit-box-shadow: 0px 1px 21px 5px rgba(0,0,0,0.55);
-    box-shadow: 0px 1px 21px 5px rgba(0,0,0,0.55);
-}
-.carousel-container{
-    padding:0 60px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-.user{
-    border-bottom: 1px solid gray;
-}
-.info-container{
-    font-size: 24px;
-}
-.profile-img{
-    height: 200px;
-    width: 200px;
-    border: 1px solid gray;
-    padding: 15px;
-}
-.email-div{
-    border: 1px solid gray;
-    margin: 0 auto;
-    margin-top: 15px;
-    width: 300px;
-    padding: 15px;
-}
 
-.navigation-container {
-    width: 100%;
-    background-color: black;
-}
 .logout-span {
     font-size: .8em;
     font-family: 'Oswald', sans-serif;
@@ -60,12 +18,15 @@
     vertical-align: middle;
 }
 .logout-button {
+    top: 11vh;
+    right: 1vw;
+    position: absolute;
     text-decoration: none;
-    float: left;
     padding: 10px;
     margin: 20px;
     color: white;
     width: 30px;
+    float: left;
     background-color: black;
     transition: width .35s;
     -webkit-transition: width .35s;
@@ -82,6 +43,142 @@
 
 .payments-container{
     display: block;
+}
+
+.profile-header{
+    display: flex;
+    padding: 10px;
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.user-data-title{
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.favourite-items-title{
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.user-data{
+    display: grid;
+    grid-template-columns: 10% 20% 70%;
+    grid-template-rows: 50% 50%;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.col-1-row-1{
+    font-weight: bold;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+.col-2-row-1{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+
+    justify-self: right;
+}
+
+.col-1-row-2{
+    font-weight: bold;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.col-2-row-2{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    justify-self: right;
+}
+
+.favourite-items-few{
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.favourite-items-few a{
+    padding: 15px;
+    color: black;
+    text-decoration: none;
+}
+
+.favourite-items-few img{
+    height: 150px;
+    width: 150px;
+}
+
+.favourite-items-few-title{
+    font-size: 14px;
+    width: 150px;
+}
+
+.favourite-items-many{
+    padding:0 60px;
+    max-width: 800px;
+    margin:0 auto;
+
+}
+
+.favourite-items{
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.chevron-button {
+    font-size: 20px;
+    color: gray;
+    border: 1px solid gray;
+    background: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+}
+
+.chevron-button:hover {
+    color: lightblue;
+    border: 1px solid lightblue;
+    background: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+}
+
+.payments-table{
+    width: 95%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.payments-table th{
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    height: 40px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.payments-table td{
+    padding: 10px;
 }
 
 

@@ -22,6 +22,6 @@ export const getLiked = (store) =>{
     return store.user.liked;
 };
 
-export const getItems= (store) =>{
+export const getItems = (store) =>{
     return store.items;
 };

@@ -28,16 +28,19 @@ class Cart extends React.PureComponent {
             cartItems: [],
             categories:  [],
             isModalOpen: false,
+            tax: 0,
+            withoutTax: 0
         };
     }
 
     calcSum = () => {
         const VAT = 20;
-        const withoutTax = Math.round(this.state.cartItems.reduce((acc, item) => acc + item.price, 0));
-        const tax = Math.round(withoutTax / 100 * VAT);
-        return {
-            withoutTax, tax
-        };
+        let withoutTax = Math.round(this.state.cartItems.reduce((acc, item) => (acc + item.price) * item.count, 0));
+        let tax = Math.round(withoutTax / 100 * VAT);
+        this.setState({
+            tax: tax,
+            withoutTax: withoutTax
+        });
     };
 
     handleModal = () =>{
@@ -56,6 +59,7 @@ class Cart extends React.PureComponent {
 
     componentDidMount() {
         this.fetchItems();
+        this.calcSum();
     }
 
     componentDidUpdate(prevProps) {
@@ -65,6 +69,7 @@ class Cart extends React.PureComponent {
             this.fetchItems();
             this.fetchRelated();
         }
+        this.calcSum();
     }
 
     fetchRelated = () => {
@@ -72,11 +77,14 @@ class Cart extends React.PureComponent {
         services.getItems()
         .then(items => {
             this.setState({
-                related: items.filter(item => this.state.categories.includes(item.category)).slice(0, 5)
+                related: items.filter((item, i, ) => this.state.categories.includes(item.category)
+                    && item._id !== this.state.cartItems[i % this.state.cartItems.length]._id).slice(0, 5)
             });
         })
         .catch(err => {
+            console.error(err);
             throw new err;
+
         });
     };
 
@@ -85,7 +93,6 @@ class Cart extends React.PureComponent {
         this.state.cartItems.forEach(item => {
             if(this.state.categories.indexOf(item.category) === -1){
                 newArray.push(item.category);
-                console.log(newArray);
             }
         });
         return this.setState({
@@ -95,11 +102,13 @@ class Cart extends React.PureComponent {
 
 
     fetchItems = () =>{
-        const promises = this.props.cartItemId.map(itemId =>
-            services.getItem({itemId})
+        const promises = this.props.cartItemId.map(itemId =>{
+            return services.getItem({itemId});
+        }
+
         );
         Promise.all(promises).then(items =>{
-
+            items.forEach(item => item.count = 1);
             this.setState({
                 cartItems: items
             });
@@ -109,16 +118,18 @@ class Cart extends React.PureComponent {
             });
     };
 
-    handleAmount = (value, _id) =>{
-        return (_id, value);
+    handleAmount = (value, id) => {
+        const item = this.state.cartItems.filter(item => item._id === id);
+        item[0].count = value;
+        this.calcSum();
     };
 
+
     render() {
-        const {tax, withoutTax} = this.calcSum();
         return (
             <>
                 <Modal open={this.state.isModalOpen} onClose={this.handleModal}>
-                    <Stripe sum={tax + withoutTax} onSubmit={this.handleSubmit}/>
+                    <Stripe sum={this.state.tax + this.state.withoutTax} onSubmit={this.handleSubmit}/>
                 </Modal>
                 {!this.state.cartItems.length > 0 &&
                     <div>
@@ -132,7 +143,7 @@ class Cart extends React.PureComponent {
                         <div className="shopping-cart">
                             <div className="title">Shopping Cart</div>
 
-                            {this.state.cartItems.filter((item, index) => this.state.cartItems.indexOf(item) === index).map((row, index) => <ItemPurchase
+                            {this.state.cartItems.filter((item, index, self) => self.indexOf(item) === index).map((row, index) => <ItemPurchase
                                 onRemove={this.handleRemove}
                                 amount={this.handleAmount}
                                 key={index} {...row}
@@ -151,7 +162,7 @@ class Cart extends React.PureComponent {
                                         <div className="total-text">Tax:</div>
                                     </td>
                                     <td>
-                                        <div className="total-price">${tax}</div>
+                                        <div className="total-price">${this.state.tax}</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,7 +170,7 @@ class Cart extends React.PureComponent {
                                         <div className="total-text">Without Tax:</div>
                                     </td>
                                     <td>
-                                        <div className="total-price">${withoutTax}</div>
+                                        <div className="total-price">${this.state.withoutTax}</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,7 +178,7 @@ class Cart extends React.PureComponent {
                                         <div className="total-text">Total:</div>
                                     </td>
                                     <td>
-                                        <div className="total-price">${tax + withoutTax}</div>
+                                        <div className="total-price">${this.state.tax + this.state.withoutTax}</div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -176,9 +187,8 @@ class Cart extends React.PureComponent {
                                 <button className="total-btn" onClick={this.handleModal}>Format Transaction</button>
                             </div>
                         </div>
-                        <button onClick={this.fetchRelated}>related</button>
                         <div className="related-products">
-                            <div className="title">Related Products</div>
+                            <div className="title" onClick={this.fetchRelated}>Related Products</div>
                             {this.state.related.map((item) => <RelatedItems key={item._id} {...item}/>)}
                         </div>
                     </div>
@@ -191,7 +201,7 @@ class Cart extends React.PureComponent {
 
 }
 
-const ItemPurchase = ({_id, title, imgSrc, category, price, quantity, onRemove}) => {
+const ItemPurchase = ({_id, title, imgSrc, category, price, quantity, onRemove, amount}) => {
     return (
         <div className="item">
             <div className="buttons">
@@ -204,7 +214,7 @@ const ItemPurchase = ({_id, title, imgSrc, category, price, quantity, onRemove})
             </div>
             <div className="quantity">
                 <InputNumber defaultValue={1} min={1} max={quantity}
-                             onChange={() => console.log(_id)}/>
+                             onChange={(value) => amount(value, _id)}/>
             </div>
             <div className="price">${price}</div>
         </div>

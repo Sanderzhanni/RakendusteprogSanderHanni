@@ -27,12 +27,20 @@ class UserPage extends React.PureComponent {
         super(props);
         this.state = {
             liked: [],
+            payments: [],
             activeItemIndex: 0,
         };
     }
 
     componentDidMount() {
         this.fetchItems();
+        const {userId, token} = this.props;
+        services.getPayments({userId, token})
+            .then(docs => {
+                this.setState({
+                    payments: docs
+                });
+            });
     }
 
     fetchItems = () =>{
@@ -56,32 +64,27 @@ class UserPage extends React.PureComponent {
     };
 
     render() {
-        let chevronWidth = 60;
         return (
             <>
-                <div className={"user-carousel-container"}>
-                    <div className={"user-container"}>
-                        <h1 className={"user"}>{this.props.user.email.split(/@|. /)[0]}</h1>
-                        <div className={"info-container"}>
-                            <img src="../../static/img/profile.png" alt="profile image" className={"profile-img"}/>
-                            <div className={"email-div"}>
-                                <div style={{fontWeight: "bold"}}>email</div>
-                                <div>{this.props.user.email}</div>
-                            </div>
-                            <br/>
-                            <div style={{fontSize: "16px"}}> created at: {this.props.user.created_at}</div>
-                            <Link to={"/users/" + this.props.userId + "/payments"}>
-                                <button>Payments</button>
-                            </Link>
-
-                        </div>
+                <div className={"Container"}>
+                    <div className={"profile-header"}>Minu konto</div>
+                    <div className={"user-data-title"}>Kasutaja andmed</div>
+                    <div className={"user-data"}>
+                        <p className={"col-1-row-1"}>Email</p>
+                        <p className={"col-2-row-1"}>{this.props.user.email}</p>
+                        <p className={"col-1-row-2"}>Created at</p>
+                        <p className={"col-2-row-2"}>{this.props.user.created_at}</p>
                     </div>
+
+                    <div className={"favourite-items-title"}>Lemmiktooted</div>
+
+                    <div className={"favourite-items"}>
                     {this.state.liked.length < 3 &&
-                        <div>
+                        <div className={"favourite-items-few"}>
                             {this.state.liked.map((item, index) =>
-                                <div key={index}>
+                                <div key={index} >
                                     <Link to={"/items/" + item._id + ""}>
-                                        <div>{item.title}</div>
+                                        <div className={"favourite-items-few-title"}>{item.title}</div>
                                         <img src={item.imgSrc} alt={item._id}/>
                                     </Link>
                                 </div>
@@ -90,23 +93,24 @@ class UserPage extends React.PureComponent {
                     }
                     {this.state.liked.length > 2 &&
                         <div>
-                            <div className={"carousel-container"}>
+                            <div className={"favourite-items-many"}>
                                 <ItemsCarousel
                                     requestToChangeActive={value => this.setState({activeItemIndex: value})}
                                     activeItemIndex={this.state.activeItemIndex}
-                                    numberOfCards={3}
-                                    gutter={5}
-                                    leftChevron={<button>{"<"}</button>}
-                                    rightChevron={<button>{">"}</button>}
+                                    numberOfCards={4}
+                                    gutter={2}
+                                    leftChevron={<button className={"chevron-button"}>{"<"}</button>}
+                                    rightChevron={<button className={"chevron-button"}>{">"}</button>}
+                                    activePosition={"center"}
 
                                     outsideChevron
-                                    chevronWidth={chevronWidth}
+                                    chevronWidth={60}
 
                                 >
                                     {this.state.liked.map((item, index) =>
-                                        <div key={index}>
+                                        <div key={index} className={"favourite-items-few"}>
                                             <Link to={"/items/" + item._id + ""}>
-                                                <div>{item.title}</div>
+                                                <div className={"favourite-items-few-title"}>{item.title}</div>
                                                 <img src={item.imgSrc} alt={item._id}/>
                                             </Link>
                                         </div>
@@ -115,16 +119,35 @@ class UserPage extends React.PureComponent {
                             </div>
                         </div>
                     }
+                </div>
+                    <div className={"favourite-items-title"}>Tellimused</div>
+                    <table className={"payments-table"}>
+                        <tr>
+                            <th>Kogus</th>
+                            <th>Summa</th>
+                            <th>Kuupäev</th>
+                            <th>Toote kood</th>
+                        </tr>
+                    {this.state.payments.map(payment => {
+                        return (
+                            <tr key={payment._id}>
+                                <td>{payment.cart.length}</td>
+                                <td>{payment.amount}</td>
+                                <td>{payment.created_at}</td>
+                                <td style={{"width":"50%"}}><Link to={"/items/" + payment.cart + ""}>{payment.cart.join(", ")}</Link></td>
+                            </tr>
+                        );
+                    })
+                    }
+                    </table>
 
+                        <div className={"logout-button"} onClick={this.handleLogout}>
+                            <AiOutlineLogout size={28} className={"logoutIcon"}/>
+                            <span className="logout-span">LOGOUT</span>
+                        </div>
 
                 </div>
 
-                <div className="navigation-container">
-                    <a className="logout-button" onClick={this.handleLogout}>
-                        <AiOutlineLogout size={28} className={"logoutIcon"}/>
-                        <span className="logout-span">LOGOUT</span>
-                    </a>
-                </div>
 
             </>
         );

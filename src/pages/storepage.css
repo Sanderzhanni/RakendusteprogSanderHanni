@@ -178,6 +178,11 @@
         padding-bottom: 20px;
         margin-top: 150px;
         background-color: #fff;
+        cursor: pointer;
+    }
+
+    .related-products:hover{
+        background-color: #fbfbfb;
     }
 
     .related-product {
