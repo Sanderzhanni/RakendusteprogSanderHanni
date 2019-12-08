@@ -134,7 +134,11 @@ class UserPage extends React.PureComponent {
                                 <td>{payment.cart.length}</td>
                                 <td>{payment.amount}</td>
                                 <td>{payment.created_at}</td>
-                                <td style={{"width":"50%"}}><Link to={"/items/" + payment.cart + ""}>{payment.cart.join(", ")}</Link></td>
+                                <td style={{"width":"50%"}}>{payment.cart.map( id => {
+                                    return(
+                                        <div key={id}><Link to={"/items/" + id}>{id}</Link></div>
+                                    );
+                                })}</td>
                             </tr>
                         );
                     })
