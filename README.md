@@ -10,22 +10,22 @@
 * Lehel  tuuakse soodustusega tooted esile
 * Kasutatakse küpsiseid, et näidata kasutajatele sobivaid tooteid
 * Saab valida tooteid kategooriate alusel :heavy_check_mark:
-* Saab sorteerida tooteid hinna ja populaarsuse järgi
+* Saab sorteerida tooteid hinna ja populaarsuse järgi :heavy_check_mark:
 * Peab toimima nutiseadmete peal :heavy_check_mark:
 * kõrge kvaliteediga thumbnailid
 * Pakub kasutajatele erilisi pakkumisi (?küpsiste alusel?)
 * Tooteid saab lisada ostukorvi :heavy_check_mark:
-* Tooteid saab eemaldada ostukorvist
+* Tooteid saab eemaldada ostukorvist :heavy_check_mark:
 * Saab valida toote hulka ostukorvis :heavy_check_mark:
-* Enne maksmist pakutakse kasutajatele lisaks "related" tooteid
-* Saab maksta krediitkaardiga
+* Enne maksmist pakutakse kasutajatele lisaks "related" tooteid :heavy_check_mark:
+* Saab maksta krediitkaardiga :heavy_check_mark:
 * Saab maksta pangalingiga
 * Kasutajatele saadetakse email ostutingimuste kohta
 * Kasutajad saavad valida pakiautomaadi, kuhu tooted transporditakse
 * Kasutajad saavad tooteid search bari kasutated otsida
 * Peaks olema FAQ section
-* Kasutajad saavad toote kohta lisainformatsiooni
-* Peab olema turvaline
+* Kasutajad saavad toote kohta lisainformatsiooni :heavy_check_mark:
+* Peab olema turvaline :heavy_check_mark:
 * Kasutajad saavad küsimuste korral mulle kirjutada emaili
 * Kasutajad saavad teatud aja sees tellimuse katkestada
 * Kasutajatel on võimalik luua enda Kasutajad :heavy_check_mark:
@@ -35,6 +35,7 @@
 * Osutkorvis pakutakse kasutajale related tooteid :heavy_check_mark:
 * Kasutajale antakse tagasisidet kas sisselogimine ja kasutajaloomine oli edukas või mitte :heavy_check_mark:
 * Kasutaja peab valideerima om emaili peale kasutaja tegemist
+* Kasutaja saab lisada tooteid lemmiktoote listi :heavy_check_mark:
 
 ## Tehniline küsimus
 
