@@ -20,7 +20,7 @@ const ProfileIcon = () => {
     );
 };
 
-const WelcomeIcon = ({user}) => {
+export const WelcomeIcon = ({user}) => {
     return (
         <Link to={"/users/" + user._id}>
             <button className="user-button" id="loginButton">
@@ -31,7 +31,7 @@ const WelcomeIcon = ({user}) => {
     );
 };
 
-const Cart = () => {
+export const Cart = () => {
     return (
         <Link to={"/cart"}>
             <button className="cart" id="cart"><img src={imgPath + "cart.png"} className="carticon"/>Shopping Cart

@@ -89,6 +89,17 @@ router.get("/", (req, res) => {
 
 });
 
+router.post("/", (req, res) => {
+    User.signup(req.body)
+        .then( user =>{
+            res.status(200).json(user);
+        })
+        .catch( err =>{
+            console.log("err", err);
+            res.send(500);
+        });
+});
+
 //delete all users
 router.delete("/", (req, res) => {
     User.deleteMany({}, (err, docs) => {

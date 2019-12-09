@@ -1,10 +1,12 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+require("@babel/polyfill");
 
 module.exports = {
+
     mode: "production",
-    entry: "./src/app.jsx",
+    entry: ["@babel/polyfill","./src/app.jsx"],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "static/bundle.js"
