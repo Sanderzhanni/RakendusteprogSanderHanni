@@ -1,4 +1,4 @@
-@media only screen and (min-width: 1241px) {
+@media only screen and (min-width: 641px) {
     html,
     body {
         width: 100%;
@@ -200,7 +200,7 @@
 }
 
 
-@media only screen and (max-width: 1240px) {
+@media only screen and (max-width: 640px) {
     html,
     body {
         width: 100%;
@@ -266,7 +266,6 @@
 
     .description {
         margin-right: 10px;
-        height: 120px;
     }
 
     .description span {
@@ -310,8 +309,8 @@
     }
 
     .total {
-        width: 80vw;
-        margin: 20px auto;
+        width: 90vw;
+        margin: 0 auto;
         padding: 10px;
         background: #fff;
         box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.822);
@@ -345,6 +344,35 @@
 
     .total-btn:hover {
         background-color: #7DDD6C;
+    }
+
+    .related-products {
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 95vw;
+        box-shadow: 1px 1px 3px 1px #9C7D8F;
+        margin-bottom: 20px;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    .related-products:hover{
+        background-color: #fbfbfb;
+    }
+
+    .related-product {
+        display: inline-block;
+        border-bottom: 1px solid gray;
+        width: 100%;
+    }
+
+    .related-image {
+        padding-top: 20px;
+        padding-left: 4px;
+        padding-right: 4px;
+        height: 175px;
+        width: 225px;
     }
 }
 

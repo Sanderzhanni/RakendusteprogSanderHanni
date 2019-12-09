@@ -62,11 +62,10 @@
     }
 
     label {
-        margin-right: 1.0em;
-        font-size: 1rem;
+        font-size: 12px;
         font-weight: bolder;
         color: #444;
-        padding: 0.8rem;
+        padding: 5px;
     }
 
     .toggle {
