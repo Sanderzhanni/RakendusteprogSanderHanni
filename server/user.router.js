@@ -7,8 +7,6 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 const Payment = require("./payments.model");
 
-
-
 router.param("userId", (req, res, next, userId) => {
     User.findById(userId, (err, user) => {
         if (err || !user) return res.status(500).send("user params error");
@@ -22,6 +20,14 @@ router.param("itemId", (req, res, next, itemId) => {
         if (err || !item) return res.status(500).send("item params error");
         req.item = item;
         next();
+    });
+});
+
+router.post("/add", (req, res) =>{
+    const item = new Item(req.body);
+    item.save(err=>{
+        if(err) return res.send(500);
+        res.send(200);
     });
 });
 

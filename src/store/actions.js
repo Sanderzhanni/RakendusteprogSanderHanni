@@ -30,9 +30,9 @@ export const refreshUser = () => (dispatch, getState) =>{
         });
 };
 
-export const getItems = () => (dispatch, getState) => {
-    const store = getState();
-    if (selectors.getItems(store).length > 0) return null;
+export const getItems = () => (dispatch) => {
+    //const store = getState();
+    //if (selectors.getItems(store).length > 0) return null;
     dispatch(itemsRequest());
     return services.getItems()
         .then(items => {

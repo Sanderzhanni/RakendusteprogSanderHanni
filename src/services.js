@@ -8,6 +8,7 @@ export const getItems = () =>{
         });
 };
 
+
 export const getItem = ({itemId}) =>{
     return fetch(`${basePath}/items/${itemId}`)
         .then(res => {

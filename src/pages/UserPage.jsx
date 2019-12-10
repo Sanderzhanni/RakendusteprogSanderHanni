@@ -29,8 +29,41 @@ class UserPage extends React.PureComponent {
             liked: [],
             payments: [],
             activeItemIndex: 0,
+            imgSrc: "",
+            title: "",
+            price: "",
+            category: "",
+            quantity: "",
         };
     }
+
+    // handleChange = (e) =>{
+    //     this.setState({
+    //         [e.target.name]: e.target.value,
+    //     });
+    // };
+    //
+    // handleSubmit = (e) =>{
+    //     console.log(e);
+    //     e.preventDefault();
+    //     fetch("/api/v1/users/add", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             imgSrc: this.state.imgSrc,
+    //             title: this.state.title,
+    //             price: this.state.price,
+    //             category: this.state.category,
+    //             quantity: this.state.quantity,
+    //         }),
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         })
+    //         .then( res => res.json())
+    //         .catch(err =>{
+    //             console.log("err", err);
+    //         });
+    // };
 
     componentDidMount() {
         this.fetchItems();
@@ -153,10 +186,61 @@ class UserPage extends React.PureComponent {
                 </div>
 
 
+
+                {/*<AddItemForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} {...this.state}></AddItemForm>*/}
+                {/*<button onClick={() => console.log(this.state.imgSrc)}>Test</button>*/}
             </>
         );
     }
 }
+/*
+const AddItemForm = (props) =>{
+    return(
+      <>
+          <form onSubmit={props.handleSubmit}>
+              <div>
+                  <label htmlFor="imgSrc">imgSrc</label>
+                  <input name="imgSrc" type="text" value={props.imgSrc} onChange={props.handleChange}/>
+              </div>
+              <div>
+                  <label htmlFor="title">title</label>
+                  <input name="title" type="text" value={props.title} onChange={props.handleChange}/>
+              </div>
+              <div>
+                  <label htmlFor="price">price</label>
+                  <input name="price" type="text" value={props.price} onChange={props.handleChange}/>
+              </div>
+              <div>
+                  <select name="category" onChange={props.handleChange} value={props.category}>
+                      <option value="">-</option>
+                      <option value="Digitaalsed klaverid">Digitaalsed klaverid</option>
+                      <option value="Basskitarrid">Basskitarrid</option>
+                  </select>
+              </div>
+              <div>
+                  <label htmlFor="quantity">quantity</label>
+                  <input name="quantity" type="text" value={props.quantity} onChange={props.handleChange}/>
+              </div>
+
+              <div>
+                  <button>Add</button>
+              </div>
+          </form>
+      </>
+    );
+};
+
+AddItemForm.propTypes = {
+    imgSrc: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    quantity: PropTypes.number,
+    dispatch: PropTypes.func.isRequired,
+    liked: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    category: PropTypes.string.isRequired
+};*/
 
 const mapStateToProps = (store) => {
     return {

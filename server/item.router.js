@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
     //res.json(DB.getItems());
 });
 
-
 //Delete
 router.delete("/:itemId", (req, res) => {
     Item.deleteOne({"_id": mongoose.Types.ObjectId(req.params.itemId)}, (err) => {
