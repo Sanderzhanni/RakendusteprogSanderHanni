@@ -9,6 +9,9 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ItemProps} from "./CartPage.jsx";
 import * as selectors from "../store/selectors";
+import SearchInput, {createFilter} from "react-search-input";
+
+const KEYS_TO_FILTERS = ["title", "category"];
 
 class HomePage extends React.PureComponent {
 
@@ -28,7 +31,8 @@ class HomePage extends React.PureComponent {
             sortDirection: -1,
             allCategories: ["Digitaalsed klaverid", "Basskitarrid"],
             selectedCategories: ["Digitaalsed klaverid"],
-            liked: this.props.liked
+            liked: this.props.liked,
+            searchTerm: ""
         };
     }
 
@@ -81,7 +85,7 @@ class HomePage extends React.PureComponent {
 
 
     getVisibleItems = () => {
-        return this.props.items
+        const items = this.props.items
             .filter(item => this.isSelected(item.category))
             .sort((a, b) => {
                 switch (this.state.sortDirection) {
@@ -92,6 +96,8 @@ class HomePage extends React.PureComponent {
                 }
 
             });
+
+        return items.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
 
     };
 
@@ -105,8 +111,12 @@ class HomePage extends React.PureComponent {
         });
     };
 
+    searchUpdated = (term)  =>{
+        this.setState({searchTerm: term});
+    };
 
     render() {
+
         const items = this.getVisibleItems();
         return (
             <>
@@ -126,7 +136,9 @@ class HomePage extends React.PureComponent {
                         })
                     }
                 </div>
-
+                <div>
+                    <SearchInput className="search-input" onChange={this.searchUpdated} />
+                </div>
 
                 <div className="foundItems">
                     <p>
